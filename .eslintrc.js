@@ -1,8 +1,12 @@
 module.exports = {
-  extends: "airbnb",
-  parser: "babel-eslint",
-  rules: {
-    indent: ["error", 4],
-    "comma-dangle": ["error", "never"]
-  }
+    env: {
+        browser: true
+    },
+    extends: 'airbnb',
+    parser: 'babel-eslint',
+    rules: {
+        indent: ['error', 4],
+        'comma-dangle': ['error', 'never'],
+        quotes: ['error', 'single']
+    }
 };
