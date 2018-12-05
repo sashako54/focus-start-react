@@ -1,4 +1,4 @@
-@import '../tasks/tasks.scss';
+@import '../messages/messages.scss';
 
 html,
 body {
@@ -18,4 +18,10 @@ body {
     padding-top: 5px;
     color: #fff;
     background-color: #000;
+}
+
+.message {
+    &__completed {
+        text-decoration: line-through;
+    }
 }
