@@ -3,18 +3,18 @@ import Message from '../message/message';
 import PropTypes from 'prop-types';
 
 const messages = [
-    { id: '1', text: 'Привет', isCompleted: true },
-    { id: '2', text: 'как дела?', isCompleted: true },
-    { id: '3', text: 'Отлично', isCompleted: true },
-    { id: '4', text: 'у меня тоже', isCompleted: false },
-    { id: '5', text: 'хорошо', isCompleted: false },
-    { id: '6', text: 'давай', isCompleted: false },
-    { id: '7', text: 'пока', isCompleted: false }
+    { id: '7', text: 'НЕТ!', isMyMessage: true },
+    { id: '6', text: 'я тебе перевел на телефон, пришли?', isMyMessage: false },
+    { id: '5', text: 'не игнорируй меня!', isMyMessage: true },
+    { id: '4', text: 'у меня тоже', isMyMessage: false },
+    { id: '3', text: 'Отлично, когда деньги вернешь?', isMyMessage: true },
+    { id: '2', text: 'ага, как дела?', isMyMessage: false },
+    { id: '1', text: 'Привет, 100 лет не переписывались', isMyMessage: true }
 ];
 
 function Messages() {
     return (
-        <div className="messages">
+        <div className="messages cover">
             {messages.map(data => (
                 <Message data={data} key={data.id} />
             ))}

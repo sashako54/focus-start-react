@@ -1,0 +1,20 @@
+.message-wrapper {
+    display: flex;
+    padding: 5px 0;
+}
+
+.message {
+    display: flex;
+    padding: 10px;
+    max-width: 70%;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+}
+
+.message-wrapper_my {
+    justify-content: flex-end;
+}
+
+.message_my {
+    text-align: end;
+}
