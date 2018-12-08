@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Messages from '../messages/messages';
-import { MessageInput, MessageSendButton } from '../messageInput/messageInput';
+import { MessageInput, MessageSendButton } from '../messageControls';
 
 class MessagesPage extends Component {
     render() {
