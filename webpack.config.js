@@ -56,6 +56,7 @@ module.exports = {
         modules: [path.join(__dirname, 'src'), 'node_modules']
     },
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        proxy: { '/api': 'http://localhost:3000' }
     }
 };

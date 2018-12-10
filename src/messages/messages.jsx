@@ -1,31 +1,45 @@
 import React, { Component } from 'react';
 import Message from '../message/message';
 import PropTypes from 'prop-types';
+import createRequest from '../core/create-request';
+import {
+    fetchMessagesFromChats,
+    createMessagesFromChats
+} from '../core/api-config';
+import classNames from '../core/class-names/class-names';
+import AddMessage from '../add-message/add-message';
 
 class Messages extends Component {
     state = {
-        messages: [
-            {
-                id: '1',
-                text: 'Привет, 100 лет не переписывались',
-                isMyMessage: true
-            },
-            { id: '2', text: 'ага, как дела?', isMyMessage: false },
-            {
-                id: '3',
-                text: 'Отлично, когда деньги вернешь?',
-                isMyMessage: true
-            },
-            { id: '4', text: 'у меня тоже', isMyMessage: false },
-            { id: '5', text: 'не игнорируй меня!', isMyMessage: true },
-            {
-                id: '6',
-                text: 'я тебе перевел на телефон, пришли?',
-                isMyMessage: false
-            },
-            { id: '7', text: 'НЕТ!', isMyMessage: true }
-        ]
+        isLoading: true,
+        messages: []
     };
+    componentDidMount() {
+        createRequest(fetchMessagesFromChats).then(response => {
+            if (response.status === 'OK') {
+                this.setState({
+                    isLoading: false,
+                    messages: response.data
+                });
+            }
+        });
+    }
+
+    addMessage = text => {
+        this.setState({ isLoading: true });
+        console.log('text', text);
+        createRequest(createMessagesFromChats, null, { text }).then(
+            ({ status, data }) => {
+                if (status === 'OK') {
+                    this.setState(({ messages }) => ({
+                        isLoading: false,
+                        messages: messages.concat(data)
+                    }));
+                }
+            }
+        );
+    };
+
     toggleMessage = event => {
         const { id } = event.currentTarget.dataset;
         // const id = event.currentTarget.dataset.id то же самое
@@ -42,10 +56,11 @@ class Messages extends Component {
     };
 
     render() {
-        const { messages } = this.state;
+        const { messages, isLoading } = this.state;
 
         return (
-            <div className="messages cover">
+            // <div className="messages cover">
+            <div className={classNames('messages', { loading: isLoading })}>
                 {messages.map(message => (
                     <Message
                         message={message}
@@ -53,13 +68,13 @@ class Messages extends Component {
                         toggleMessage={this.toggleMessage}
                     />
                 ))}
+                <AddMessage addMessage={this.addMessage} />
             </div>
         );
     }
 }
 
 Messages.propTypes = {
-    // data: PropTypes.object.isRequired
     data: PropTypes.shape({
         id: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,

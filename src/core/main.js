@@ -1,3 +1,5 @@
+import '@babel/polyfill';
+import 'whatwg-fetch';
 import ReactDom from 'react-dom';
 import React from 'react';
 import Root from './root';
