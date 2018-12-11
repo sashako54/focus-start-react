@@ -4,17 +4,21 @@ import PropTypes from 'prop-types';
 import createRequest from '../core/create-request';
 import {
     fetchMessagesFromChats,
-    createMessagesFromChats
+    createMessagesFromChats,
+    updateMessage
 } from '../core/api-config';
 import classNames from '../core/class-names/class-names';
 import AddMessage from '../add-message/add-message';
 
 class Messages extends Component {
     state = {
+        id: document.cookie.split('=')[1],
         isLoading: true,
         messages: []
     };
+
     componentDidMount() {
+        console.log('state.id', this.state.id);
         createRequest(fetchMessagesFromChats).then(response => {
             if (response.status === 'OK') {
                 this.setState({
@@ -24,6 +28,25 @@ class Messages extends Component {
             }
         });
     }
+
+    getUserId = () => {
+        return this.state.id;
+    };
+
+    updateMessage = (chatId, id) => {
+        this.setState({ isLoading: true });
+        console.log('text', text);
+        createRequest(updateMessage, { chatId, id }).then(
+            ({ status, data }) => {
+                if (status === 'OK') {
+                    this.setState(({ messages }) => ({
+                        isLoading: false,
+                        messages: messages.concat(data)
+                    }));
+                }
+            }
+        );
+    };
 
     addMessage = text => {
         this.setState({ isLoading: true });
@@ -40,15 +63,53 @@ class Messages extends Component {
         );
     };
 
-    toggleMessage = event => {
+    // toggleMessage = event => {
+    //     const { id } = event.currentTarget.dataset;
+    //     // const id = event.currentTarget.dataset.id то же самое
+    //     console.log(`update message-${id}`);
+
+    //     this.setState(state => ({
+    //         messages: state.messages.map(data => {
+    //             if (data.id === id) {
+    //                 return { ...data, isMyMessage: !data.isMyMessage };
+    //             }
+    //             return data;
+    //         })
+    //     }));
+    // };
+
+    highlightMessage = event => {
+        const _stateId = this.state.id;
+        console.log('_stateId ', _stateId);
+        const getUserId = () => {
+            return this.state.id;
+        };
         const { id } = event.currentTarget.dataset;
         // const id = event.currentTarget.dataset.id то же самое
         console.log(`update message-${id}`);
 
         this.setState(state => ({
             messages: state.messages.map(data => {
+                // console.log('data.id', data.id);
                 if (data.id === id) {
-                    return { ...data, isMyMessage: !data.isMyMessage };
+                    // console.log('getuserId', getUserId());
+                    // console.log(
+                    //     'isHighlight _stateId ',
+                    //     data.isHighlight[_stateId]
+                    // );
+                    console.log(
+                        'isHighlight',
+                        data.isHighlight['4469047b78ce']
+                    );
+
+                    const isHighlight = data.isHighlight;
+                    isHighlight['4469047b78ce'] = !isHighlight['4469047b78ce'];
+
+                    return {
+                        ...data,
+                        // isHighlight: !data.isHighlight['4469047b78ce']
+                        isHighlight: isHighlight
+                    };
                 }
                 return data;
             })
@@ -65,7 +126,7 @@ class Messages extends Component {
                     <Message
                         message={message}
                         key={message.id}
-                        toggleMessage={this.toggleMessage}
+                        highlightMessage={this.highlightMessage}
                     />
                 ))}
                 <AddMessage addMessage={this.addMessage} />
@@ -80,7 +141,7 @@ Messages.propTypes = {
         text: PropTypes.string.isRequired,
         isCompleted: PropTypes.bool
     }).isRequired,
-    toggleMessage: PropTypes.func
+    highlightMessage: PropTypes.func
 };
 
 export default Messages;
