@@ -61,23 +61,20 @@ class Messages extends Component {
 
     highlightMessage = event => {
         this.setState({ isLoading: true });
-        const userId = this.state.id;
+        const myId = this.state.id;
         const { id } = event.currentTarget.dataset;
         console.log(`update message-${id}`);
 
-        createRequest(highlightMessage, { id, userId }).then(({ status }) => {
+        createRequest(highlightMessage, { id, myId }).then(({ status }) => {
             if (status === 'OK') {
                 this.setState(state => ({
                     isLoading: false,
                     messages: state.messages.map(data => {
                         if (data.id === id) {
-                            console.log(
-                                'isHighlight',
-                                data.isHighlight[userId]
-                            );
+                            console.log('isHighlight', data.isHighlight[myId]);
 
                             const isHighlight = data.isHighlight;
-                            isHighlight[userId] = !isHighlight[userId];
+                            isHighlight[myId] = !isHighlight[myId];
 
                             return {
                                 ...data,
@@ -94,7 +91,7 @@ class Messages extends Component {
     // highlightMessage = event => {
     //     const _stateId = this.state.id;
     //     console.log('_stateId ', _stateId);
-    //     const getUserId = () => {
+    //     const getmyId = () => {
     //         return this.state.id;
     //     };
     //     const { id } = event.currentTarget.dataset;
@@ -105,7 +102,7 @@ class Messages extends Component {
     //         messages: state.messages.map(data => {
     //             // console.log('data.id', data.id);
     //             if (data.id === id) {
-    //                 // console.log('getuserId', getUserId());
+    //                 // console.log('getmyId', getmyId());
     //                 // console.log(
     //                 //     'isHighlight _stateId ',
     //                 //     data.isHighlight[_stateId]
@@ -140,7 +137,7 @@ class Messages extends Component {
                         message={message}
                         key={message.id}
                         highlightMessage={this.highlightMessage}
-                        userId={this.state.id}
+                        myId={this.state.id}
                     />
                 ))}
                 <AddMessage addMessage={this.addMessage} />

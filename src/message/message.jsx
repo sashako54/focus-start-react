@@ -18,18 +18,16 @@ class Message extends PureComponent {
     };
 
     render() {
-        const { message, userId } = this.props;
+        const { message, myId } = this.props;
 
         console.log(`render message-${message.id}`);
         console.log('message.isHighlight', message.isHighlight);
-        console.log('message.isHighlight chat', message.isHighlight[userId]);
+        console.log('message.isHighlight chat', message.isHighlight[myId]);
         return (
             <div
                 className={`message-wrapper ${
-                    message.isHighlight[userId]
-                        ? 'message-wrapper_highlight'
-                        : ''
-                }`}
+                    message.isHighlight[myId] ? 'message-wrapper_highlight' : ''
+                } ${message.userId === myId ? 'message-wrapper_my' : ''}`}
                 onClick={this.highlightMessage}
                 data-id={message.id}
             >
