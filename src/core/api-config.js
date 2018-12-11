@@ -19,6 +19,6 @@ export const createMessagesFromChats = {
 };
 
 export const updateMessage = {
-    path: '/api/v001/chats/:chatId/:id',
+    path: '/api/v001/chats/f1f87db0abd2f/',
     method: 'PATCH'
 };

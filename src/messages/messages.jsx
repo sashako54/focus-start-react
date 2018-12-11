@@ -29,25 +29,6 @@ class Messages extends Component {
         });
     }
 
-    getUserId = () => {
-        return this.state.id;
-    };
-
-    updateMessage = (chatId, id) => {
-        this.setState({ isLoading: true });
-        console.log('text', text);
-        createRequest(updateMessage, { chatId, id }).then(
-            ({ status, data }) => {
-                if (status === 'OK') {
-                    this.setState(({ messages }) => ({
-                        isLoading: false,
-                        messages: messages.concat(data)
-                    }));
-                }
-            }
-        );
-    };
-
     addMessage = text => {
         this.setState({ isLoading: true });
         console.log('text', text);
@@ -79,42 +60,73 @@ class Messages extends Component {
     // };
 
     highlightMessage = event => {
-        const _stateId = this.state.id;
-        console.log('_stateId ', _stateId);
-        const getUserId = () => {
-            return this.state.id;
-        };
+        this.setState({ isLoading: true });
+        const userId = this.state.id;
         const { id } = event.currentTarget.dataset;
-        // const id = event.currentTarget.dataset.id то же самое
         console.log(`update message-${id}`);
 
-        this.setState(state => ({
-            messages: state.messages.map(data => {
-                // console.log('data.id', data.id);
-                if (data.id === id) {
-                    // console.log('getuserId', getUserId());
-                    // console.log(
-                    //     'isHighlight _stateId ',
-                    //     data.isHighlight[_stateId]
-                    // );
-                    console.log(
-                        'isHighlight',
-                        data.isHighlight['4469047b78ce']
-                    );
+        createRequest(updateMessage, { id, userId }).then(({ status }) => {
+            if (status === 'OK') {
+                this.setState(state => ({
+                    messages: state.messages.map(data => {
+                        if (data.id === id) {
+                            console.log(
+                                'isHighlight',
+                                data.isHighlight[userId]
+                            );
 
-                    const isHighlight = data.isHighlight;
-                    isHighlight['4469047b78ce'] = !isHighlight['4469047b78ce'];
+                            const isHighlight = data.isHighlight;
+                            isHighlight[userId] = !isHighlight[userId];
 
-                    return {
-                        ...data,
-                        // isHighlight: !data.isHighlight['4469047b78ce']
-                        isHighlight: isHighlight
-                    };
-                }
-                return data;
-            })
-        }));
+                            return {
+                                ...data,
+                                isHighlight: isHighlight
+                            };
+                        }
+                        return data;
+                    })
+                }));
+            }
+        });
     };
+
+    // highlightMessage = event => {
+    //     const _stateId = this.state.id;
+    //     console.log('_stateId ', _stateId);
+    //     const getUserId = () => {
+    //         return this.state.id;
+    //     };
+    //     const { id } = event.currentTarget.dataset;
+    //     // const id = event.currentTarget.dataset.id то же самое
+    //     console.log(`update message-${id}`);
+
+    //     this.setState(state => ({
+    //         messages: state.messages.map(data => {
+    //             // console.log('data.id', data.id);
+    //             if (data.id === id) {
+    //                 // console.log('getuserId', getUserId());
+    //                 // console.log(
+    //                 //     'isHighlight _stateId ',
+    //                 //     data.isHighlight[_stateId]
+    //                 // );
+    //                 console.log(
+    //                     'isHighlight',
+    //                     data.isHighlight['4469047b78ce']
+    //                 );
+
+    //                 const isHighlight = data.isHighlight;
+    //                 isHighlight['4469047b78ce'] = !isHighlight['4469047b78ce'];
+
+    //                 return {
+    //                     ...data,
+    //                     // isHighlight: !data.isHighlight['4469047b78ce']
+    //                     isHighlight: isHighlight
+    //                 };
+    //             }
+    //             return data;
+    //         })
+    //     }));
+    // };
 
     render() {
         const { messages, isLoading } = this.state;
