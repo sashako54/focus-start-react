@@ -18,7 +18,7 @@ export const createMessagesFromChats = {
     method: 'POST'
 };
 
-export const updateMessage = {
+export const highlightMessage = {
     path: '/api/v001/chats/f1f87db0abd2f/',
     method: 'PATCH'
 };

@@ -5,7 +5,7 @@ import createRequest from '../core/create-request';
 import {
     fetchMessagesFromChats,
     createMessagesFromChats,
-    updateMessage
+    highlightMessage
 } from '../core/api-config';
 import classNames from '../core/class-names/class-names';
 import AddMessage from '../add-message/add-message';
@@ -65,9 +65,10 @@ class Messages extends Component {
         const { id } = event.currentTarget.dataset;
         console.log(`update message-${id}`);
 
-        createRequest(updateMessage, { id, userId }).then(({ status }) => {
+        createRequest(highlightMessage, { id, userId }).then(({ status }) => {
             if (status === 'OK') {
                 this.setState(state => ({
+                    isLoading: false,
                     messages: state.messages.map(data => {
                         if (data.id === id) {
                             console.log(
@@ -139,6 +140,7 @@ class Messages extends Component {
                         message={message}
                         key={message.id}
                         highlightMessage={this.highlightMessage}
+                        userId={this.state.id}
                     />
                 ))}
                 <AddMessage addMessage={this.addMessage} />
