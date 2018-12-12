@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import Message from '../message/message';
 import PropTypes from 'prop-types';
 import createRequest from '../core/create-request';
@@ -16,6 +16,32 @@ class Messages extends Component {
         isLoading: true,
         messages: []
     };
+    listRef = createRef();
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('this.state.messages.length', this.state.messages.length);
+        console.log(
+            'this.listRef.current.children.length',
+            this.listRef.current.children.length
+        );
+        if (this.listRef.current.children.length < this.state.messages.length) {
+            const list = this.listRef.current;
+            console.log(
+                'list.scrollHeight - list.scrollTop',
+                list.scrollHeight - list.scrollTop
+            );
+            return list.scrollHeight - list.scrollTop;
+        }
+        return null;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (snapshot !== null) {
+            const list = this.listRef.current;
+            list.scrollTop = list.scrollHeight - snapshot;
+            console.log('list', list);
+        }
+    }
 
     componentDidMount() {
         console.log('state.id', this.state.id);
@@ -131,15 +157,20 @@ class Messages extends Component {
 
         return (
             // <div className="messages cover">
-            <div className={classNames('messages', { loading: isLoading })}>
-                {messages.map(message => (
-                    <Message
-                        message={message}
-                        key={message.id}
-                        highlightMessage={this.highlightMessage}
-                        myId={this.state.id}
-                    />
-                ))}
+            <div className="messages-wrapper cover">
+                <div
+                    ref={this.listRef}
+                    className={classNames('messages', { loading: isLoading })}
+                >
+                    {messages.map(message => (
+                        <Message
+                            message={message}
+                            key={message.id}
+                            highlightMessage={this.highlightMessage}
+                            myId={this.state.id}
+                        />
+                    ))}
+                </div>
                 <AddMessage addMessage={this.addMessage} />
             </div>
         );

@@ -1,6 +1,6 @@
 @import '../messages/messages.scss';
 @import '../message/message.scss';
-@import '../messageControls/messageControls.scss';
+@import '../add-message/add-message.scss';
 
 *,
 *::before,
@@ -61,16 +61,13 @@ ul {
     height: 100%;
 }
 
+.app-wrapper {
+    height: 100%;
+}
+
 .messages-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
-}
-
-.input-wrapper {
-    display: flex;
-    padding: 20px 0;
-    flex-direction: row;
-    align-items: flex-end;
 }

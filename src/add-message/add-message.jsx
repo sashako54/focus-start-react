@@ -21,16 +21,12 @@ class AddMessage extends Component {
         return (
             <form className="add-message" onSubmit={this.onSubmit}>
                 <input
-                    className="add-message_field"
+                    className="add-message__field"
                     type="text"
                     name="text"
                     ref={this.textRef}
                 />
-                <input
-                    className="add-message_button"
-                    type="submit"
-                    value="Добавить"
-                />
+                <input className="add-message__button" type="submit" value="" />
             </form>
         );
     }
