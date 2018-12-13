@@ -32,7 +32,7 @@ class Message extends PureComponent {
                 data-id={message.id}
             >
                 <p
-                    className={`message`}
+                    className='message'
                     // message.toggle ? 'message_my' : '' //TODO: добавить смещение влево, если сообщение моё
                 >
                     {message.text}

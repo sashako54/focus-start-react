@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
-import Message from '../message/message';
 import PropTypes from 'prop-types';
+import Message from '../message/message';
 import createRequest from '../core/create-request';
 import {
     fetchMessagesFromChats,
@@ -17,32 +17,8 @@ class Messages extends Component {
         isLoading: true,
         messages: []
     };
+
     listRef = createRef();
-
-    getSnapshotBeforeUpdate(prevProps, prevState) {
-        console.log('this.state.messages.length', this.state.messages.length);
-        console.log(
-            'this.listRef.current.children.length',
-            this.listRef.current.children.length
-        );
-        if (this.listRef.current.children.length < this.state.messages.length) {
-            const list = this.listRef.current;
-            console.log(
-                'list.scrollHeight - list.scrollTop',
-                list.scrollHeight - list.scrollTop
-            );
-            return list.scrollHeight - list.scrollTop;
-        }
-        return null;
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (snapshot !== null) {
-            const list = this.listRef.current;
-            list.scrollTop = list.scrollHeight - snapshot;
-            console.log('list', list);
-        }
-    }
 
     componentDidMount() {
         console.log('state.id', this.state.id);
@@ -64,6 +40,31 @@ class Messages extends Component {
                 }
             });
         }, 5000);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (snapshot !== null) {
+            const list = this.listRef.current;
+            list.scrollTop = list.scrollHeight - snapshot;
+            console.log('list', list);
+        }
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('this.state.messages.length', this.state.messages.length);
+        console.log(
+            'this.listRef.current.children.length',
+            this.listRef.current.children.length
+        );
+        if (this.listRef.current.children.length < this.state.messages.length) {
+            const list = this.listRef.current;
+            console.log(
+                'list.scrollHeight - list.scrollTop',
+                list.scrollHeight - list.scrollTop
+            );
+            return list.scrollHeight - list.scrollTop;
+        }
+        return null;
     }
 
     addMessage = text => {
@@ -110,12 +111,12 @@ class Messages extends Component {
                         if (data.id === id) {
                             console.log('isHighlight', data.isHighlight[myId]);
 
-                            const isHighlight = data.isHighlight;
+                            const { isHighlight } = data;
                             isHighlight[myId] = !isHighlight[myId];
 
                             return {
                                 ...data,
-                                isHighlight: isHighlight
+                                isHighlight
                             };
                         }
                         return data;
@@ -170,7 +171,7 @@ class Messages extends Component {
 
         return (
             // <div className="messages cover">
-            <div className="messages-wrapper cover">
+            <div className='messages-wrapper cover'>
                 <div
                     ref={this.listRef}
                     className={classNames('messages', { loading: isLoading })}

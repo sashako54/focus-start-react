@@ -10,7 +10,7 @@ class AddMessage extends Component {
 
     onSubmit = event => {
         const { addMessage } = this.props;
-        console.log('props:', this.props.addMessage);
+        console.log('props:', addMessage);
         event.preventDefault();
 
         addMessage(this.textRef.current.value);
@@ -19,14 +19,14 @@ class AddMessage extends Component {
 
     render() {
         return (
-            <form className="add-message" onSubmit={this.onSubmit}>
+            <form className='add-message' onSubmit={this.onSubmit}>
                 <input
-                    className="add-message__field"
-                    type="text"
-                    name="text"
+                    className='add-message__field'
+                    type='text'
+                    name='text'
                     ref={this.textRef}
                 />
-                <input className="add-message__button" type="submit" value="" />
+                <input className='add-message__button' type='submit' value='' />
             </form>
         );
     }
