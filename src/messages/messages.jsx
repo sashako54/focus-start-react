@@ -5,7 +5,6 @@ import createRequest from '../core/create-request';
 import {
     fetchMessagesFromChats,
     createMessagesFromChats,
-    highlightMessage,
     updateMessages
 } from '../core/api-config';
 import classNames from '../core/class-names/class-names';
@@ -85,38 +84,25 @@ class Messages extends Component {
     };
 
     highlightMessage = event => {
-        this.setState({ isLoading: true });
         const myId = this.state.id;
         const { id } = event.currentTarget.dataset;
-        console.log(`update message-${id}`);
-
-        createRequest(highlightMessage, { id, myId }).then(({ status }) => {
-            if (status === 'OK') {
-                this.setState(state => ({
-                    isLoading: false,
-                    messages: state.messages.map(data => {
-                        if (data.id === id) {
-                            console.log('isHighlight', data.isHighlight[myId]);
-
-                            const { isHighlight } = data;
-                            isHighlight[myId] = !isHighlight[myId];
-
-                            return {
-                                ...data,
-                                isHighlight
-                            };
-                        }
-                        return data;
-                    })
-                }));
-            }
-        });
+        this.setState(state => ({
+            messages: state.messages.map(data => {
+                if (data.id === id) {
+                    const { isHighlight } = data;
+                    isHighlight[myId] = !isHighlight[myId];
+                    return {
+                        ...data,
+                        isHighlight
+                    };
+                }
+                return data;
+            })
+        }));
     };
 
     render() {
         const { messages, isLoading } = this.state;
-
-        console.log('messages after update', messages);
 
         return (
             // <div className="messages cover">
