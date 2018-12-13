@@ -7,7 +7,6 @@ module.exports = {
                 except: ['first-nested', 'after-comment'],
                 ignore: ['after-declaration']
             }
-        ],
-        indent: ['error', 4]
+        ]
     }
 };

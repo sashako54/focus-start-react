@@ -5,7 +5,8 @@ import createRequest from '../core/create-request';
 import {
     fetchMessagesFromChats,
     createMessagesFromChats,
-    highlightMessage
+    highlightMessage,
+    updateMessages
 } from '../core/api-config';
 import classNames from '../core/class-names/class-names';
 import AddMessage from '../add-message/add-message';
@@ -54,9 +55,15 @@ class Messages extends Component {
             }
         });
 
-        // this.pingInterval = setInterval(() => {
-        //     createRequest();
-        // }, 1000);
+        this.pingInterval = setInterval(() => {
+            createRequest(updateMessages).then(({ status, data }) => {
+                if (status === 'OK') {
+                    this.setState(({ messages }) => ({
+                        messages: messages.concat(data)
+                    }));
+                }
+            });
+        }, 5000);
     }
 
     addMessage = text => {
@@ -158,6 +165,8 @@ class Messages extends Component {
 
     render() {
         const { messages, isLoading } = this.state;
+
+        console.log('messages after update', messages);
 
         return (
             // <div className="messages cover">
