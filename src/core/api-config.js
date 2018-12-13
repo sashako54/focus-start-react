@@ -22,3 +22,8 @@ export const highlightMessage = {
     path: '/api/v001/chats/f1f87db0abd2f/',
     method: 'PATCH'
 };
+
+export const updateMessages = {
+    path: '/api/v001/events/new-messages/',
+    method: 'GET'
+};

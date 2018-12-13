@@ -53,6 +53,10 @@ class Messages extends Component {
                 });
             }
         });
+
+        // this.pingInterval = setInterval(() => {
+        //     createRequest();
+        // }, 1000);
     }
 
     addMessage = text => {
