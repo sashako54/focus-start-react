@@ -32,11 +32,22 @@ class Messages extends Component {
         });
 
         this.pingInterval = setInterval(() => {
+            const prevMessages = this.state.messages;
             createRequest(updateMessages).then(({ status, data }) => {
                 if (status === 'OK') {
-                    this.setState(({ messages }) => ({
-                        messages: messages.concat(data)
-                    }));
+                    const alreadyDraw = data.filter(message => {
+                        const findMessage = prevMessages.find(item => {
+                            if (item.id === message.id) {
+                                return true;
+                            }
+                        });
+                        if (findMessage) return true;
+                    });
+                    if (alreadyDraw.length === 0) {
+                        this.setState(({ messages }) => ({
+                            messages: messages.concat(data)
+                        }));
+                    }
                 }
             });
         }, 5000);
@@ -51,17 +62,8 @@ class Messages extends Component {
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
-        console.log('this.state.messages.length', this.state.messages.length);
-        console.log(
-            'this.listRef.current.children.length',
-            this.listRef.current.children.length
-        );
         if (this.listRef.current.children.length < this.state.messages.length) {
             const list = this.listRef.current;
-            console.log(
-                'list.scrollHeight - list.scrollTop',
-                list.scrollHeight - list.scrollTop
-            );
             return list.scrollHeight - list.scrollTop;
         }
         return null;
@@ -81,21 +83,6 @@ class Messages extends Component {
             }
         );
     };
-
-    // toggleMessage = event => {
-    //     const { id } = event.currentTarget.dataset;
-    //     // const id = event.currentTarget.dataset.id то же самое
-    //     console.log(`update message-${id}`);
-
-    //     this.setState(state => ({
-    //         messages: state.messages.map(data => {
-    //             if (data.id === id) {
-    //                 return { ...data, isMyMessage: !data.isMyMessage };
-    //             }
-    //             return data;
-    //         })
-    //     }));
-    // };
 
     highlightMessage = event => {
         this.setState({ isLoading: true });
@@ -125,44 +112,6 @@ class Messages extends Component {
             }
         });
     };
-
-    // highlightMessage = event => {
-    //     const _stateId = this.state.id;
-    //     console.log('_stateId ', _stateId);
-    //     const getmyId = () => {
-    //         return this.state.id;
-    //     };
-    //     const { id } = event.currentTarget.dataset;
-    //     // const id = event.currentTarget.dataset.id то же самое
-    //     console.log(`update message-${id}`);
-
-    //     this.setState(state => ({
-    //         messages: state.messages.map(data => {
-    //             // console.log('data.id', data.id);
-    //             if (data.id === id) {
-    //                 // console.log('getmyId', getmyId());
-    //                 // console.log(
-    //                 //     'isHighlight _stateId ',
-    //                 //     data.isHighlight[_stateId]
-    //                 // );
-    //                 console.log(
-    //                     'isHighlight',
-    //                     data.isHighlight['4469047b78ce']
-    //                 );
-
-    //                 const isHighlight = data.isHighlight;
-    //                 isHighlight['4469047b78ce'] = !isHighlight['4469047b78ce'];
-
-    //                 return {
-    //                     ...data,
-    //                     // isHighlight: !data.isHighlight['4469047b78ce']
-    //                     isHighlight: isHighlight
-    //                 };
-    //             }
-    //             return data;
-    //         })
-    //     }));
-    // };
 
     render() {
         const { messages, isLoading } = this.state;
