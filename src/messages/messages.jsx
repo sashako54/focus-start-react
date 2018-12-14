@@ -151,6 +151,9 @@ class Messages extends Component {
         return (
             // <div className="messages cover">
             <div className='messages-wrapper cover'>
+                <div className='messages-info-wrapper'>
+                    <DeleteMessages deleteMessages={this.deleteMessages} />
+                </div>
                 <div
                     ref={this.listRef}
                     className={classNames('messages', { loading: isLoading })}
@@ -165,7 +168,6 @@ class Messages extends Component {
                     ))}
                 </div>
                 <AddMessage addMessage={this.addMessage} />
-                <DeleteMessages deleteMessages={this.deleteMessages} />
             </div>
         );
     }

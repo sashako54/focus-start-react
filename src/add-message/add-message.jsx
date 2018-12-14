@@ -11,7 +11,9 @@ class AddMessage extends Component {
     onSubmit = event => {
         const { addMessage } = this.props;
         event.preventDefault();
-
+        if (this.textRef.current.value === '') {
+            return;
+        }
         addMessage(this.textRef.current.value);
         this.textRef.current.value = '';
     };

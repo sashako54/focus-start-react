@@ -1,6 +1,7 @@
 @import '../messages/messages.scss';
 @import '../message/message.scss';
 @import '../add-message/add-message.scss';
+@import '../delete-messages/delete-messages.scss';
 
 *,
 *::before,
@@ -65,9 +66,31 @@ ul {
     height: 100%;
 }
 
+.header {
+    background-color: #fff;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+}
+
+.nav-wrapper__link {
+    text-transform: uppercase;
+    color: #000;
+    transition: color 200ms ease-in-out;
+}
+
+.nav-wrapper__link:hover {
+    color: #333;
+}
+
 .messages-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100%;
+    height: calc(100% - 50px);
 }

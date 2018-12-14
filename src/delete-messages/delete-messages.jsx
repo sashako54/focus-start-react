@@ -14,8 +14,9 @@ class DeleteMessages extends PureComponent {
     render() {
         return (
             <input
-                className='add-message__button'
-                value='удалить сообщения'
+                className='delete-messages__button'
+                type='submit'
+                value=''
                 onClick={this.onClick}
             />
         );

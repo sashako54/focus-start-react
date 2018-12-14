@@ -7,10 +7,18 @@ function Root() {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Link to='/'>messagesPage</Link>
-                <Link to='/authorization'>authorization</Link>
-                <Route exact path='/' component={Messages} />
-                <Route path='/authorization' component={Authorization} />
+                <div className='header'>
+                    <div className='nav-wrapper cover'>
+                        <Link className='nav-wrapper__link' to='/'>
+                            Главная
+                        </Link>
+                        <Link className='nav-wrapper__link' to='/chat'>
+                            Чат
+                        </Link>
+                    </div>
+                </div>
+                <Route exact path='/chat' component={Messages} />
+                <Route path='/' component={Authorization} />
             </div>
         </BrowserRouter>
     );
