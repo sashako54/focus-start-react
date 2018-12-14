@@ -5,10 +5,12 @@ import createRequest from '../core/create-request';
 import {
     fetchMessagesFromChats,
     createMessagesFromChats,
-    updateMessages
+    updateMessages,
+    deleteMessages
 } from '../core/api-config';
 import classNames from '../core/class-names/class-names';
 import AddMessage from '../add-message/add-message';
+import DeleteMessages from '../delete-messages/delete-messages';
 
 class Messages extends Component {
     state = {
@@ -83,6 +85,48 @@ class Messages extends Component {
         );
     };
 
+    deleteMessages = () => {
+        this.setState({ isLoading: true });
+        // список id выделенных сообщений ['id_1', 'id_3'...]
+        const prevMessages = this.state.messages;
+        const myId = this.state.id;
+        const highlightMessagesList = [];
+        prevMessages.map(message => {
+            if (message.isHighlight[myId] === true) {
+                highlightMessagesList.push(message.id);
+            }
+        });
+        createRequest(deleteMessages, null, { highlightMessagesList }).then(
+            ({ status }) => {
+                if (status === 'OK') {
+                    this.setState(({ messages }) => ({
+                        isLoading: false,
+                        messages: messages.reduce((prev, message, index) => {
+                            const messagesObj = prev;
+                            for (let prop of highlightMessagesList) {
+                                if (message.id === prop) {
+                                    return prev;
+                                }
+                            }
+                            messagesObj.push(message);
+                            return messagesObj;
+                        }, [])
+                        // messages: messages.map(message => {
+                        //     for (let prop of highlightMessagesList) {
+                        //         if (message.id === prop) {
+                        //             message.isVisible[myId] = false;
+                        //             console.log('prop!!!!!', prop);
+                        //         }
+                        //     }
+                        //     console.log('message', message);
+                        //     return message;
+                        // })
+                    }));
+                }
+            }
+        );
+    };
+
     highlightMessage = event => {
         const myId = this.state.id;
         const { id } = event.currentTarget.dataset;
@@ -121,6 +165,7 @@ class Messages extends Component {
                     ))}
                 </div>
                 <AddMessage addMessage={this.addMessage} />
+                <DeleteMessages deleteMessages={this.deleteMessages} />
             </div>
         );
     }

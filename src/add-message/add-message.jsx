@@ -10,7 +10,6 @@ class AddMessage extends Component {
 
     onSubmit = event => {
         const { addMessage } = this.props;
-        console.log('props:', addMessage);
         event.preventDefault();
 
         addMessage(this.textRef.current.value);

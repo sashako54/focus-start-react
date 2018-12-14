@@ -18,9 +18,8 @@ export const createMessagesFromChats = {
     method: 'POST'
 };
 
-export const highlightMessage = {
-    //TODO: переделать в удаление
-    path: '/api/v001/chats/f1f87db0abd2f/',
+export const deleteMessages = {
+    path: '/api/v001/chats/f1f87db0abd2f/messages',
     method: 'PATCH'
 };
 
