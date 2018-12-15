@@ -14,6 +14,7 @@ module.exports = {
         'react/destructuring-assignment': ['error', 'as-needed'],
         'jsx-quotes': ['error', 'prefer-single'],
         'react/jsx-indent-props': ['error', 4],
-        'implicit-arrow-linebreak': ['error', 'beside']
+		'implicit-arrow-linebreak': ['error', 'beside'],
+		'linebreak-style': ['error', 'windows']
     }
 };

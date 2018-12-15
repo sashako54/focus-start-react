@@ -23,14 +23,16 @@ class Messages extends Component {
 
     componentDidMount() {
         console.log('state.id', this.state.id);
-        createRequest(fetchMessagesFromChats).then(response => {
-            if (response.status === 'OK') {
-                this.setState({
-                    isLoading: false,
-                    messages: response.data
-                });
+        createRequest(fetchMessagesFromChats, { chatId: 'f1f87db0abd2f' }).then(
+            response => {
+                if (response.status === 'OK') {
+                    this.setState({
+                        isLoading: false,
+                        messages: response.data
+                    });
+                }
             }
-        });
+        );
 
         this.pingInterval = setInterval(() => {
             const prevMessages = this.state.messages;
@@ -73,16 +75,18 @@ class Messages extends Component {
     addMessage = text => {
         this.setState({ isLoading: true });
         console.log('text', text);
-        createRequest(createMessagesFromChats, null, { text }).then(
-            ({ status, data }) => {
-                if (status === 'OK') {
-                    this.setState(({ messages }) => ({
-                        isLoading: false,
-                        messages: messages.concat(data)
-                    }));
-                }
+        createRequest(
+            createMessagesFromChats,
+            { chatId: 'f1f87db0abd2f' },
+            { text }
+        ).then(({ status, data }) => {
+            if (status === 'OK') {
+                this.setState(({ messages }) => ({
+                    isLoading: false,
+                    messages: messages.concat(data)
+                }));
             }
-        );
+        });
     };
 
     deleteMessages = () => {
@@ -96,35 +100,37 @@ class Messages extends Component {
                 highlightMessagesList.push(message.id);
             }
         });
-        createRequest(deleteMessages, null, { highlightMessagesList }).then(
-            ({ status }) => {
-                if (status === 'OK') {
-                    this.setState(({ messages }) => ({
-                        isLoading: false,
-                        messages: messages.reduce((prev, message, index) => {
-                            const messagesObj = prev;
-                            for (let prop of highlightMessagesList) {
-                                if (message.id === prop) {
-                                    return prev;
-                                }
+        createRequest(
+            deleteMessages,
+            { chatId: 'f1f87db0abd2f' },
+            { highlightMessagesList }
+        ).then(({ status }) => {
+            if (status === 'OK') {
+                this.setState(({ messages }) => ({
+                    isLoading: false,
+                    messages: messages.reduce((prev, message, index) => {
+                        const messagesObj = prev;
+                        for (let prop of highlightMessagesList) {
+                            if (message.id === prop) {
+                                return prev;
                             }
-                            messagesObj.push(message);
-                            return messagesObj;
-                        }, [])
-                        // messages: messages.map(message => {
-                        //     for (let prop of highlightMessagesList) {
-                        //         if (message.id === prop) {
-                        //             message.isVisible[myId] = false;
-                        //             console.log('prop!!!!!', prop);
-                        //         }
-                        //     }
-                        //     console.log('message', message);
-                        //     return message;
-                        // })
-                    }));
-                }
+                        }
+                        messagesObj.push(message);
+                        return messagesObj;
+                    }, [])
+                    // messages: messages.map(message => {
+                    //     for (let prop of highlightMessagesList) {
+                    //         if (message.id === prop) {
+                    //             message.isVisible[myId] = false;
+                    //             console.log('prop!!!!!', prop);
+                    //         }
+                    //     }
+                    //     console.log('message', message);
+                    //     return message;
+                    // })
+                }));
             }
-        );
+        });
     };
 
     highlightMessage = event => {
