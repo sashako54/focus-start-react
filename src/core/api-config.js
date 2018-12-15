@@ -1,11 +1,6 @@
-export const fetchMessages = {
-    path: '/api/v001/messages',
+export const fetchUsers = {
+    path: '/api/v001/users',
     method: 'GET'
-};
-
-export const createMessages = {
-    path: '/api/v001/messages',
-    method: 'POST'
 };
 
 export const fetchMessagesFromChats = {

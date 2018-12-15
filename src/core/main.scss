@@ -2,6 +2,9 @@
 @import '../message/message.scss';
 @import '../add-message/add-message.scss';
 @import '../delete-messages/delete-messages.scss';
+@import '../main-page/main-page.scss';
+@import '../users/users.scss';
+@import '../user/user.scss';
 
 *,
 *::before,
@@ -54,7 +57,7 @@ ul {
 }
 
 .cover {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
 }
 

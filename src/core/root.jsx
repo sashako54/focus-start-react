@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Messages from '../messages/messages';
-import Authorization from '../authorization/authorization';
+import MainPage from '../main-page/main-page';
 
 function Root() {
     return (
@@ -17,8 +17,8 @@ function Root() {
                         </Link>
                     </div>
                 </div>
+                <Route path='/' component={MainPage} />
                 <Route exact path='/chat' component={Messages} />
-                <Route path='/' component={Authorization} />
             </div>
         </BrowserRouter>
     );
