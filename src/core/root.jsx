@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Messages from '../messages/messages';
-import MainPage from '../main-page/main-page';
+import Users from '../users/users';
 
 function Root() {
     return (
@@ -17,8 +17,10 @@ function Root() {
                         </Link>
                     </div>
                 </div>
-                <Route path='/' component={MainPage} />
-                <Route exact path='/chat' component={Messages} />
+                <div className='mainpage-wrapper cover'>
+                    <Route path='/' component={Users} />
+                    <Route exact path='/chat' component={Messages} />
+                </div>
             </div>
         </BrowserRouter>
     );

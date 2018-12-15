@@ -156,7 +156,7 @@ class Messages extends Component {
 
         return (
             // <div className="messages cover">
-            <div className='messages-wrapper cover'>
+            <div className='messages-wrapper'>
                 <div className='messages-info-wrapper'>
                     <DeleteMessages deleteMessages={this.deleteMessages} />
                 </div>
