@@ -168,10 +168,10 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
-    data: PropTypes.shape({
+    message: PropTypes.shape({
         id: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
-        isCompleted: PropTypes.bool
+        isHighlight: PropTypes.object
     }).isRequired,
     highlightMessage: PropTypes.func
 };

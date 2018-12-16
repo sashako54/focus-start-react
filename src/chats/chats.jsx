@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import UserName from '../user-name/user-name';
+import ChatName from '../chat-name/chat-name';
 import createRequest from '../core/create-request';
-import { fetchUsers } from '../core/api-config';
+import { fetchChats } from '../core/api-config';
 import getCookie from '../core/getCookie';
 
-class Users extends Component {
+class Chats extends Component {
     state = {
         id: getCookie('id'),
         isLoading: true,
-        users: []
+        chats: []
     };
 
     componentDidMount() {
-        createRequest(fetchUsers).then(({ status, data }) => {
+        createRequest(fetchChats).then(({ status, data }) => {
             if (status === 'OK') {
                 this.setState({
                     isLoading: false,
-                    users: data
+                    chats: data
                 });
             }
         });
     }
     render() {
-        const { users } = this.state;
+        const { chats } = this.state;
         return (
             <div className='sidebar'>
-                <h3 className='sidebar-title'>Users</h3>
-                {users.map(user => (
-                    <Link key={user.id} to='/users/chat'>
-                        <UserName user={user} />
+                <h3 className='sidebar-title'>Chats</h3>
+                {chats.map(chat => (
+                    <Link key={chat.chatId} to='/users/chat'>
+                        <ChatName chat={chat} />
                     </Link>
                 ))}
             </div>
@@ -37,4 +37,4 @@ class Users extends Component {
     }
 }
 
-export default Users;
+export default Chats;

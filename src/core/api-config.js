@@ -8,6 +8,11 @@ export const createUsers = {
     method: 'POST'
 };
 
+export const fetchChats = {
+    path: '/api/v001/chats',
+    method: 'GET'
+};
+
 export const fetchMessagesFromChats = {
     path: '/api/v001/chats/:chatId/messages',
     method: 'GET'
