@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import Messages from '../messages/messages';
 import User from '../user/user';
 import createRequest from '../core/create-request';
 import { fetchUsers } from '../core/api-config';

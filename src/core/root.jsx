@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Messages from '../messages/messages';
 import Users from '../users/users';
+import AddUser from '../add-user/add-user';
 
 function Root() {
     return (
@@ -19,6 +20,7 @@ function Root() {
                 </div>
                 <div className='mainpage-wrapper cover'>
                     <Route path='/' component={Users} />
+                    <Route path='/' component={AddUser} />
                     <Route exact path='/chat' component={Messages} />
                 </div>
             </div>
