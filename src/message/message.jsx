@@ -21,7 +21,6 @@ class Message extends PureComponent {
         const { message, myId } = this.props;
 
         console.log(`render message-${message.id}`);
-        // console.log('message.isHighlight chat', message.isHighlight[myId]);
         return (
             <div
                 className={`message-wrapper ${
@@ -32,12 +31,7 @@ class Message extends PureComponent {
                 onClick={this.highlightMessage}
                 data-id={message.id}
             >
-                <p
-                    className='message'
-                    // message.toggle ? 'message_my' : '' //TODO: добавить смещение влево, если сообщение моё
-                >
-                    {message.text}
-                </p>
+                <p className='message'>{message.text}</p>
             </div>
         );
     }

@@ -43,9 +43,12 @@
     height: 32px;
     border-radius: 3px;
     border: none;
-    // background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="#f1f1f1"/><path fill="#cecece" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>');
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0iI2YxZjFmMSIvPjxwYXRoIGZpbGw9IiNjZWNlY2UiIGQ9Ik0yLjAxIDIxTDIzIDEyIDIuMDEgMyAyIDEwbDE1IDItMTUgMnoiLz48L3N2Zz4=);
     transform: rotateZ(180deg);
     transition: background-image 200ms ease-in-out;
     cursor: pointer;
+}
+
+.add-user__button:hover {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0iI2YxZjFmMSIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yLjAxIDIxTDIzIDEyIDIuMDEgMyAyIDEwbDE1IDItMTUgMnoiLz48L3N2Zz4=);
 }

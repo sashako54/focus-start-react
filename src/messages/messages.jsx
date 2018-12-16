@@ -11,10 +11,11 @@ import {
 import classNames from '../core/class-names/class-names';
 import AddMessage from '../add-message/add-message';
 import DeleteMessages from '../delete-messages/delete-messages';
+import getCookie from '../core/getCookie';
 
 class Messages extends Component {
     state = {
-        id: document.cookie.split('=')[1],
+        id: getCookie('id'),
         isLoading: true,
         messages: []
     };
@@ -60,7 +61,6 @@ class Messages extends Component {
         if (snapshot !== null) {
             const list = this.listRef.current;
             list.scrollTop = list.scrollHeight - snapshot;
-            console.log('list', list);
         }
     }
 
@@ -74,7 +74,6 @@ class Messages extends Component {
 
     addMessage = text => {
         this.setState({ isLoading: true });
-        console.log('text', text);
         createRequest(
             createMessagesFromChats,
             { chatId: 'f1f87db0abd2f' },
@@ -118,16 +117,6 @@ class Messages extends Component {
                         messagesObj.push(message);
                         return messagesObj;
                     }, [])
-                    // messages: messages.map(message => {
-                    //     for (let prop of highlightMessagesList) {
-                    //         if (message.id === prop) {
-                    //             message.isVisible[myId] = false;
-                    //             console.log('prop!!!!!', prop);
-                    //         }
-                    //     }
-                    //     console.log('message', message);
-                    //     return message;
-                    // })
                 }));
             }
         });
@@ -155,7 +144,6 @@ class Messages extends Component {
         const { messages, isLoading } = this.state;
 
         return (
-            // <div className="messages cover">
             <div className='messages-wrapper'>
                 <div className='messages-info-wrapper'>
                     <DeleteMessages deleteMessages={this.deleteMessages} />
