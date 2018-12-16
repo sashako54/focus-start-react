@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 class UserName extends Component {
     render() {
         const { user } = this.props;
-        return <div className='sidebar-item'>{user.name}</div>;
+        return (
+            <div data-userId={user.id} className='sidebar-item'>
+                {user.name}
+            </div>
+        );
     }
 }
 

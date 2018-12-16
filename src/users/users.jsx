@@ -22,6 +22,7 @@ class Users extends Component {
             }
         });
     }
+
     render() {
         const { users } = this.state;
         return (

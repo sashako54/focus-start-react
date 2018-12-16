@@ -21,6 +21,7 @@ class Message extends PureComponent {
         const { message, myId } = this.props;
 
         console.log(`render message-${message.id}`);
+
         return (
             <div
                 className={`message-wrapper ${

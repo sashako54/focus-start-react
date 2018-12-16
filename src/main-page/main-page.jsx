@@ -7,24 +7,27 @@ import Chats from '../chats/chats';
 // import createRequest from '../core/create-request';
 // import {} from '../core/api-config';
 // import classNames from '../core/class-names/class-names';
-import getCookie from '../core/getCookie';
+// import getCookie from '../core/getCookie';
 
 class MainPage extends Component {
     state = {
-        id: getCookie('id'),
-        chatId: ''
+        // id: getCookie('id'),
+        chatId: 'f1f87db0abd2f'
     };
 
-    componentDidMount() {}
-
     render() {
+        const { chatId } = this.state;
         return (
             <div className='mainpage-wrapper cover'>
                 <div className='sidebar-wrapper'>
                     <Route path='/users' component={Users} />
                     <Route path='/users' component={Chats} />
                 </div>
-                <Route exact path='/users/chat' component={Messages} />
+                <Route
+                    exact
+                    path='/users/chat'
+                    render={() => <Messages chatId={chatId} />}
+                />
             </div>
         );
     }

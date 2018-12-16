@@ -23,17 +23,16 @@ class Messages extends Component {
     listRef = createRef();
 
     componentDidMount() {
+        const { chatId } = this.props;
         console.log('state.id', this.state.id);
-        createRequest(fetchMessagesFromChats, { chatId: 'f1f87db0abd2f' }).then(
-            response => {
-                if (response.status === 'OK') {
-                    this.setState({
-                        isLoading: false,
-                        messages: response.data
-                    });
-                }
+        createRequest(fetchMessagesFromChats, { chatId }).then(response => {
+            if (response.status === 'OK') {
+                this.setState({
+                    isLoading: false,
+                    messages: response.data
+                });
             }
-        );
+        });
 
         this.pingInterval = setInterval(() => {
             const prevMessages = this.state.messages;
@@ -73,22 +72,22 @@ class Messages extends Component {
     }
 
     addMessage = text => {
+        const { chatId } = this.props;
         this.setState({ isLoading: true });
-        createRequest(
-            createMessagesFromChats,
-            { chatId: 'f1f87db0abd2f' },
-            { text }
-        ).then(({ status, data }) => {
-            if (status === 'OK') {
-                this.setState(({ messages }) => ({
-                    isLoading: false,
-                    messages: messages.concat(data)
-                }));
+        createRequest(createMessagesFromChats, { chatId }, { text }).then(
+            ({ status, data }) => {
+                if (status === 'OK') {
+                    this.setState(({ messages }) => ({
+                        isLoading: false,
+                        messages: messages.concat(data)
+                    }));
+                }
             }
-        });
+        );
     };
 
     deleteMessages = () => {
+        const { chatId } = this.props;
         this.setState({ isLoading: true });
         // список id выделенных сообщений ['id_1', 'id_3'...]
         const prevMessages = this.state.messages;
@@ -101,7 +100,7 @@ class Messages extends Component {
         });
         createRequest(
             deleteMessages,
-            { chatId: 'f1f87db0abd2f' },
+            { chatId },
             { highlightMessagesList }
         ).then(({ status }) => {
             if (status === 'OK') {
@@ -142,6 +141,7 @@ class Messages extends Component {
 
     render() {
         const { messages, isLoading } = this.state;
+        console.log('props messages', this.props);
 
         return (
             <div className='messages-wrapper'>
@@ -168,6 +168,7 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
+    chatId: PropTypes.string.isRequired,
     message: PropTypes.shape({
         id: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
