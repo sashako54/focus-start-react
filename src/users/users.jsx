@@ -28,7 +28,7 @@ class Users extends Component {
             <div className='users-wrapper'>
                 <h3 className='users-title'>Users</h3>
                 {users.map(user => (
-                    <Link to='/chat'>
+                    <Link to='/users/chat'>
                         <User user={user} key={user.id} />
                     </Link>
                 ))}

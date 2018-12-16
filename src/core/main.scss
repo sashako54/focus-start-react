@@ -1,3 +1,4 @@
+@import './uikit.scss';
 @import '../messages/messages.scss';
 @import '../message/message.scss';
 @import '../add-message/add-message.scss';
@@ -5,61 +6,6 @@
 @import '../users/users.scss';
 @import '../user/user.scss';
 @import '../add-user/add-user.scss';
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body,
-html {
-    height: 100%;
-    font-size: 16px;
-    font-family: Arial;
-    background-color: #f1f1f1;
-}
-
-:active,
-:hover,
-:focus {
-    outline: 0;
-    outline-offset: 0;
-}
-
-a,
-a:hover,
-a:focus,
-a:active {
-    text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0;
-}
-
-button {
-    padding: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-ul {
-    list-style: none;
-}
-
-.cover {
-    max-width: 800px;
-    margin: 0 auto;
-}
 
 #root {
     height: 100%;
@@ -70,7 +16,10 @@ ul {
 }
 
 .header {
+    position: relative;
     background-color: #fff;
+    box-shadow: 0 0 16px 1px #cecece;
+    z-index: 1;
 }
 
 .nav-wrapper {

@@ -18,10 +18,10 @@ function Root() {
                         </Link>
                     </div>
                 </div>
+                <Route exact path='/' component={AddUser} />
                 <div className='mainpage-wrapper cover'>
-                    <Route path='/' component={Users} />
-                    <Route path='/' component={AddUser} />
-                    <Route exact path='/chat' component={Messages} />
+                    <Route path='/users' component={Users} />
+                    <Route exact path='/users/chat' component={Messages} />
                 </div>
             </div>
         </BrowserRouter>
