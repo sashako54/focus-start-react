@@ -12,6 +12,11 @@ class Users extends Component {
         users: []
     };
 
+    openChatByUserId = event => {
+        const { openChatByUserId } = this.props;
+        openChatByUserId(event);
+    };
+
     componentDidMount() {
         createRequest(fetchUsers).then(({ status, data }) => {
             if (status === 'OK') {
@@ -30,7 +35,10 @@ class Users extends Component {
                 <h3 className='sidebar-title'>Users</h3>
                 {users.map(user => (
                     <Link key={user.id} to='/users/chat'>
-                        <UserName user={user} />
+                        <UserName
+                            openChatByUserId={this.openChatByUserId}
+                            user={user}
+                        />
                     </Link>
                 ))}
             </div>

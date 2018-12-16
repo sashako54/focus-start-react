@@ -15,12 +15,22 @@ class MainPage extends Component {
         chatId: 'f1f87db0abd2f'
     };
 
+    openChatByUserId = event => {
+        const { userid } = event.currentTarget.dataset;
+        console.log('userId', userid);
+    };
+
     render() {
         const { chatId } = this.state;
         return (
             <div className='mainpage-wrapper cover'>
                 <div className='sidebar-wrapper'>
-                    <Route path='/users' component={Users} />
+                    <Route
+                        path='/users'
+                        render={() => (
+                            <Users openChatByUserId={this.openChatByUserId} />
+                        )}
+                    />
                     <Route path='/users' component={Chats} />
                 </div>
                 <Route

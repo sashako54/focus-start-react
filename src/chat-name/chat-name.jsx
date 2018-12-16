@@ -4,7 +4,7 @@ class ChatName extends Component {
     render() {
         const { chat } = this.props;
         return (
-            <div data-chatId={chat.chatId} className='sidebar-item'>
+            <div data-chatid={chat.chatId} className='sidebar-item'>
                 {chat.users.join(', ')}
             </div>
         );
