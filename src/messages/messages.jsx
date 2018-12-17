@@ -25,7 +25,7 @@ class Messages extends Component {
 
     componentDidMount() {
         const { chatId } = this.state;
-        console.log('chatId', chatId);
+        // console.log('chatId', chatId);
         createRequest(fetchMessagesFromChats, { chatId }).then(response => {
             if (response.status === 'OK') {
                 this.setState({
@@ -57,52 +57,24 @@ class Messages extends Component {
         }, 5000);
     }
 
-    // shouldComponentUpdate(nextProps, prevState) {
-    //     if (nextProps.chatId !== prevState.chatId) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    // componentWillUpdate(nextProps, prevState) {
-    //     clearInterval(this.pingInterval);
-    //     const { chatId } = nextProps;
-
-    //     createRequest(fetchMessagesFromChats, { chatId }).then(response => {
-    //         if (response.status === 'OK') {
-    //             this.setState({
-    //                 isLoading: false,
-    //                 messages: response.data
-    //             });
-    //         }
-    //     });
-
-    //     this.pingInterval = setInterval(() => {
-    //         const prevMessages = this.state.messages;
-    //         createRequest(updateMessages).then(({ status, data }) => {
-    //             if (status === 'OK') {
-    //                 const alreadyDraw = data.filter(message => {
-    //                     const findMessage = prevMessages.find(item => {
-    //                         if (item.id === message.id) {
-    //                             return true;
-    //                         }
-    //                     });
-    //                     if (findMessage) return true;
-    //                 });
-    //                 if (alreadyDraw.length === 0) {
-    //                     this.setState(({ messages }) => ({
-    //                         messages: messages.concat(data)
-    //                     }));
-    //                 }
-    //             }
-    //         });
-    //     }, 5000);
-    // }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (snapshot !== null) {
             const list = this.listRef.current;
             list.scrollTop = list.scrollHeight - snapshot;
+        }
+
+        if (prevProps.chatId !== this.props.chatId) {
+            console.log('condition chenge chatId!');
+            const { chatId } = this.props;
+            console.log('chatId', chatId);
+            createRequest(fetchMessagesFromChats, { chatId }).then(response => {
+                if (response.status === 'OK') {
+                    this.setState({
+                        isLoading: false,
+                        messages: response.data
+                    });
+                }
+            });
         }
     }
 
@@ -113,18 +85,6 @@ class Messages extends Component {
         }
         return null;
     }
-
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     console.log('nextProps', nextProps);
-    //     console.log('prevState', prevState);
-    //     console.log('обновление компонента');
-    //     if (nextProps.chatId !== prevState.chatId) {
-    //         return {
-    //             chatId: nextProps.chatId
-    //         };
-    //     }
-    //     return null;
-    // }
 
     addMessage = text => {
         const { chatId } = this.state;
@@ -196,8 +156,8 @@ class Messages extends Component {
 
     render() {
         const { messages, isLoading } = this.state;
-        console.log('props messages', this.props);
-        console.log('massages', messages);
+        // console.log('props messages', this.props);
+        // console.log('massages', messages);
 
         return (
             <div className='messages-wrapper'>

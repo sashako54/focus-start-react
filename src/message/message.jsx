@@ -20,7 +20,7 @@ class Message extends PureComponent {
     render() {
         const { message, myId } = this.props;
 
-        console.log(`render message-${message.id}`);
+        // console.log(`render message-${message.id}`);
 
         return (
             <div
