@@ -17,14 +17,14 @@ class Messages extends Component {
     state = {
         id: getCookie('id'),
         isLoading: true,
-        messages: []
+        messages: [],
+        chatId: this.props.chatId
     };
 
     listRef = createRef();
 
     componentDidMount() {
-        const { chatId } = this.props;
-        console.log('state.id', this.state.id);
+        const { chatId } = this.state;
         console.log('chatId', chatId);
         createRequest(fetchMessagesFromChats, { chatId }).then(response => {
             if (response.status === 'OK') {
@@ -57,6 +57,48 @@ class Messages extends Component {
         }, 5000);
     }
 
+    // shouldComponentUpdate(nextProps, prevState) {
+    //     if (nextProps.chatId !== prevState.chatId) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    // componentWillUpdate(nextProps, prevState) {
+    //     clearInterval(this.pingInterval);
+    //     const { chatId } = nextProps;
+
+    //     createRequest(fetchMessagesFromChats, { chatId }).then(response => {
+    //         if (response.status === 'OK') {
+    //             this.setState({
+    //                 isLoading: false,
+    //                 messages: response.data
+    //             });
+    //         }
+    //     });
+
+    //     this.pingInterval = setInterval(() => {
+    //         const prevMessages = this.state.messages;
+    //         createRequest(updateMessages).then(({ status, data }) => {
+    //             if (status === 'OK') {
+    //                 const alreadyDraw = data.filter(message => {
+    //                     const findMessage = prevMessages.find(item => {
+    //                         if (item.id === message.id) {
+    //                             return true;
+    //                         }
+    //                     });
+    //                     if (findMessage) return true;
+    //                 });
+    //                 if (alreadyDraw.length === 0) {
+    //                     this.setState(({ messages }) => ({
+    //                         messages: messages.concat(data)
+    //                     }));
+    //                 }
+    //             }
+    //         });
+    //     }, 5000);
+    // }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (snapshot !== null) {
             const list = this.listRef.current;
@@ -72,8 +114,20 @@ class Messages extends Component {
         return null;
     }
 
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     console.log('nextProps', nextProps);
+    //     console.log('prevState', prevState);
+    //     console.log('обновление компонента');
+    //     if (nextProps.chatId !== prevState.chatId) {
+    //         return {
+    //             chatId: nextProps.chatId
+    //         };
+    //     }
+    //     return null;
+    // }
+
     addMessage = text => {
-        const { chatId } = this.props;
+        const { chatId } = this.state;
         this.setState({ isLoading: true });
         createRequest(createMessagesFromChats, { chatId }, { text }).then(
             ({ status, data }) => {
@@ -88,7 +142,7 @@ class Messages extends Component {
     };
 
     deleteMessages = () => {
-        const { chatId } = this.props;
+        const { chatId } = this.state;
         this.setState({ isLoading: true });
         // список id выделенных сообщений ['id_1', 'id_3'...]
         const prevMessages = this.state.messages;
