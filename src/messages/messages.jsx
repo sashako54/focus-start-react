@@ -17,15 +17,14 @@ class Messages extends Component {
     state = {
         id: getCookie('id'),
         isLoading: true,
-        messages: [],
-        chatId: this.props.chatId
+        messages: []
     };
 
     listRef = createRef();
 
     componentDidMount() {
-        const { chatId } = this.state;
-        // console.log('chatId', chatId);
+        console.log('this.props', this.props);
+        const { chatId } = this.props.match.params;
         createRequest(fetchMessagesFromChats, { chatId }).then(response => {
             if (response.status === 'OK') {
                 this.setState({
@@ -63,10 +62,8 @@ class Messages extends Component {
             list.scrollTop = list.scrollHeight - snapshot;
         }
 
-        if (prevProps.chatId !== this.props.chatId) {
-            console.log('condition chenge chatId!');
-            const { chatId } = this.props;
-            console.log('chatId', chatId);
+        if (prevProps.match.params.chatId !== this.props.match.params.chatId) {
+            const { chatId } = this.props.match.params;
             createRequest(fetchMessagesFromChats, { chatId }).then(response => {
                 if (response.status === 'OK') {
                     this.setState({
@@ -87,7 +84,7 @@ class Messages extends Component {
     }
 
     addMessage = text => {
-        const { chatId } = this.state;
+        const { chatId } = this.props.match.params;
         this.setState({ isLoading: true });
         createRequest(createMessagesFromChats, { chatId }, { text }).then(
             ({ status, data }) => {
@@ -102,7 +99,7 @@ class Messages extends Component {
     };
 
     deleteMessages = () => {
-        const { chatId } = this.state;
+        const { chatId } = this.props.match.params;
         this.setState({ isLoading: true });
         // список id выделенных сообщений ['id_1', 'id_3'...]
         const prevMessages = this.state.messages;
@@ -156,8 +153,6 @@ class Messages extends Component {
 
     render() {
         const { messages, isLoading } = this.state;
-        // console.log('props messages', this.props);
-        // console.log('massages', messages);
 
         return (
             <div className='messages-wrapper'>

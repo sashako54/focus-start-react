@@ -40,12 +40,11 @@ class MainPage extends Component {
                 }
             })
             .then(() => {
-                this.props.history.push('/users/chat');
+                this.props.history.push(`/users/chat/${this.state.chatId}`);
             });
     };
 
     render() {
-        const { chatId } = this.state;
         return (
             <div className='mainpage-wrapper cover'>
                 <div className='sidebar-wrapper'>
@@ -57,11 +56,7 @@ class MainPage extends Component {
                     />
                     <Route path='/users' component={Chats} />
                 </div>
-                <Route
-                    exact
-                    path='/users/chat'
-                    render={() => <Messages chatId={chatId} />}
-                />
+                <Route exact path='/users/chat/:chatId' component={Messages} />
             </div>
         );
     }
