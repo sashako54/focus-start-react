@@ -25,6 +25,7 @@ class Messages extends Component {
     componentDidMount() {
         const { chatId } = this.props;
         console.log('state.id', this.state.id);
+        console.log('chatId', chatId);
         createRequest(fetchMessagesFromChats, { chatId }).then(response => {
             if (response.status === 'OK') {
                 this.setState({
@@ -142,6 +143,7 @@ class Messages extends Component {
     render() {
         const { messages, isLoading } = this.state;
         console.log('props messages', this.props);
+        console.log('massages', messages);
 
         return (
             <div className='messages-wrapper'>

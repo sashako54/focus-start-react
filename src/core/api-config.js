@@ -13,6 +13,16 @@ export const fetchChats = {
     method: 'GET'
 };
 
+export const fetchChatByUserId = {
+    path: '/api/v001/chats/:userId',
+    method: 'GET'
+};
+
+export const createChatByUserId = {
+    path: '/api/v001/chats/:userId',
+    method: 'POST'
+};
+
 export const fetchMessagesFromChats = {
     path: '/api/v001/chats/:chatId/messages',
     method: 'GET'
