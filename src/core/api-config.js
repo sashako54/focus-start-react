@@ -1,3 +1,8 @@
+export const fetchAllUsers = {
+    path: '/api/v001/users/all',
+    method: 'GET'
+};
+
 export const fetchUsers = {
     path: '/api/v001/users',
     method: 'GET'

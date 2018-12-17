@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { fetchUsers, createUsers } from '../core/api-config';
+import { fetchAllUsers, createUsers } from '../core/api-config';
 import getCookie from '../core/getCookie';
 import createRequest from '../core/create-request';
 
@@ -19,7 +19,7 @@ class AddUser extends Component {
 
     componentDidMount() {
         const { id } = this.state;
-        createRequest(fetchUsers).then(({ status, data }) => {
+        createRequest(fetchAllUsers).then(({ status, data }) => {
             if (status === 'OK') {
                 this.setState({
                     isLoading: false,

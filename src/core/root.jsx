@@ -18,7 +18,7 @@ function Root() {
                     </div>
                 </div>
                 <Route exact path='/' component={AddUser} />
-                <Route exact patch='/users' component={MainPage} />
+                <Route path='/users' component={MainPage} />
             </div>
         </BrowserRouter>
     );

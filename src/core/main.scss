@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Arsenal');
 @import './uikit.scss';
 @import '../messages/messages.scss';
 @import '../message/message.scss';
@@ -8,6 +9,7 @@
 
 #root {
     height: 100%;
+    font-family: 'Arsenal', sans-serif;
 }
 
 .app-wrapper {

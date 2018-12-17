@@ -179,7 +179,6 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
-    chatId: PropTypes.string.isRequired,
     message: PropTypes.shape({
         id: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,

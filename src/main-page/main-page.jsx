@@ -20,7 +20,6 @@ class MainPage extends Component {
         console.log('userId', userid);
         createRequest(fetchChatByUserId, { userId: userid })
             .then(({ status, data }) => {
-                // TODO: если data - undefined, нужно добавить запрос, на то, чтоб сделать новый чат
                 console.log('data', data);
                 if (status === 'OK' && data) {
                     this.setState(() => ({
@@ -56,7 +55,7 @@ class MainPage extends Component {
                     />
                     <Route path='/users' component={Chats} />
                 </div>
-                <Route exact path='/users/chat/:chatId' component={Messages} />
+                <Route path='/users/chat/:chatId' component={Messages} />
             </div>
         );
     }
