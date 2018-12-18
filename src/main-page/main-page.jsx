@@ -44,6 +44,7 @@ class MainPage extends Component {
     };
 
     render() {
+        const { chatId } = this.state;
         return (
             <div className='mainpage-wrapper cover'>
                 <div className='sidebar-wrapper'>
@@ -53,7 +54,10 @@ class MainPage extends Component {
                             <Users openChatByUserId={this.openChatByUserId} />
                         )}
                     />
-                    <Route path='/users' component={Chats} />
+                    <Route
+                        path='/users'
+                        render={() => <Chats chatId={chatId} />}
+                    />
                 </div>
                 <Route path='/users/chat/:chatId' component={Messages} />
             </div>

@@ -34,13 +34,11 @@ class Users extends Component {
             <div className='sidebar'>
                 <h3 className='sidebar-title'>Users</h3>
                 {users.map(user => (
-                    // <Link key={user.id} to='/users/chat'>
                     <UserName
                         key={user.id}
                         openChatByUserId={this.openChatByUserId}
                         user={user}
                     />
-                    // </Link>
                 ))}
             </div>
         );

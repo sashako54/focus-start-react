@@ -27,4 +27,9 @@
     padding: 5px 20px;
     font-size: 14px;
     color: #333;
+    cursor: pointer;
+}
+
+.sidebar-item_active {
+    background-color: rgba(0, 0, 0, 0.1);
 }

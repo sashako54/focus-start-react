@@ -25,13 +25,12 @@ class Chats extends Component {
 
     render() {
         const { chats } = this.state;
+        const { chatId } = this.props;
         return (
             <div className='sidebar'>
                 <h3 className='sidebar-title'>Chats</h3>
                 {chats.map(chat => (
-                    <Link key={chat.chatId} to='/users/chat'>
-                        <ChatName chat={chat} />
-                    </Link>
+                    <ChatName key={chat.chatId} chatId={chatId} chat={chat} />
                 ))}
             </div>
         );
