@@ -59,13 +59,13 @@ class Messages extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        const { chatId } = this.props.match.params;
         if (snapshot !== null) {
             const list = this.listRef.current;
             list.scrollTop = list.scrollHeight - snapshot;
         }
 
-        if (prevProps.match.params.chatId !== this.props.match.params.chatId) {
-            const { chatId } = this.props.match.params;
+        if (prevProps.match.params.chatId !== chatId) {
             createRequest(fetchMessages, { chatId }).then(response => {
                 if (response.status === 'OK') {
                     this.setState({
@@ -75,6 +75,29 @@ class Messages extends Component {
                 }
             });
         }
+        clearInterval(this.pingInterval);
+        this.pingInterval = setInterval(() => {
+            const prevMessages = this.state.messages;
+            createRequest(updateMessages, { chatId }).then(
+                ({ status, data }) => {
+                    if (status === 'OK') {
+                        const alreadyDraw = data.filter(message => {
+                            const findMessage = prevMessages.find(item => {
+                                if (item.id === message.id) {
+                                    return true;
+                                }
+                            });
+                            if (findMessage) return true;
+                        });
+                        if (alreadyDraw.length === 0) {
+                            this.setState(({ messages }) => ({
+                                messages: messages.concat(data)
+                            }));
+                        }
+                    }
+                }
+            );
+        }, 5000);
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
