@@ -28,12 +28,12 @@ export const createChatByUserId = {
     method: 'POST'
 };
 
-export const fetchMessagesFromChats = {
+export const fetchMessages = {
     path: '/api/v001/chats/:chatId/messages',
     method: 'GET'
 };
 
-export const createMessagesFromChats = {
+export const createMessage = {
     path: '/api/v001/chats/:chatId/messages',
     method: 'POST'
 };

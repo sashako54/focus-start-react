@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Message from '../message/message';
 import createRequest from '../core/create-request';
 import {
-    fetchMessagesFromChats,
-    createMessagesFromChats,
+    fetchMessages,
+    createMessage,
     updateMessages,
     deleteMessages
 } from '../core/api-config';
@@ -25,7 +25,7 @@ class Messages extends Component {
     componentDidMount() {
         console.log('this.props', this.props);
         const { chatId } = this.props.match.params;
-        createRequest(fetchMessagesFromChats, { chatId }).then(response => {
+        createRequest(fetchMessages, { chatId }).then(response => {
             if (response.status === 'OK') {
                 this.setState({
                     isLoading: false,
@@ -64,7 +64,7 @@ class Messages extends Component {
 
         if (prevProps.match.params.chatId !== this.props.match.params.chatId) {
             const { chatId } = this.props.match.params;
-            createRequest(fetchMessagesFromChats, { chatId }).then(response => {
+            createRequest(fetchMessages, { chatId }).then(response => {
                 if (response.status === 'OK') {
                     this.setState({
                         isLoading: false,
@@ -86,7 +86,7 @@ class Messages extends Component {
     addMessage = text => {
         const { chatId } = this.props.match.params;
         this.setState({ isLoading: true });
-        createRequest(createMessagesFromChats, { chatId }, { text }).then(
+        createRequest(createMessage, { chatId }, { text }).then(
             ({ status, data }) => {
                 if (status === 'OK') {
                     this.setState(({ messages }) => ({
