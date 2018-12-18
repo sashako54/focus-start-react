@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from '../core/class-names/class-names';
+import getTime from '../core/getTime';
 
 class Message extends PureComponent {
     // shouldComponentUpdate(nextProps) {
@@ -21,8 +22,6 @@ class Message extends PureComponent {
     render() {
         const { message, myId } = this.props;
 
-        // console.log(`render message-${message.id}`);
-
         return (
             <div
                 className={classNames('message-wrapper', {
@@ -32,7 +31,21 @@ class Message extends PureComponent {
                 onClick={this.highlightMessage}
                 data-id={message.id}
             >
-                <p className='message'>{message.text}</p>
+                <div
+                    className={classNames('message', {
+                        my: message.userId === myId
+                    })}
+                >
+                    {message.userId !== myId ? (
+                        <p className='message-title'>{`${message.name}:`}</p>
+                    ) : (
+                        ''
+                    )}
+                    <p className='message-text'>{message.text}</p>
+                    <time className='message-date'>
+                        {getTime(message.date)}
+                    </time>
+                </div>
             </div>
         );
     }

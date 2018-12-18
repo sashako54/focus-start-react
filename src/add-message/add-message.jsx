@@ -20,15 +20,21 @@ class AddMessage extends Component {
 
     render() {
         return (
-            <form className='add-message' onSubmit={this.onSubmit}>
-                <input
-                    className='add-message__field'
-                    type='text'
-                    name='text'
-                    ref={this.textRef}
-                />
-                <input className='add-message__button' type='submit' value='' />
-            </form>
+            <div>
+                <form className='add-message' onSubmit={this.onSubmit}>
+                    <input
+                        className='add-message__field'
+                        type='text'
+                        name='text'
+                        ref={this.textRef}
+                    />
+                    <input
+                        className='add-message__button'
+                        type='submit'
+                        value=''
+                    />
+                </form>
+            </div>
         );
     }
 }
