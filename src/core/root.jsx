@@ -12,9 +12,6 @@ function Root() {
                         <Link className='nav-wrapper__link' to='/'>
                             Главная
                         </Link>
-                        <Link className='nav-wrapper__link' to='/chat'>
-                            Чат
-                        </Link>
                     </div>
                 </div>
                 <Route exact path='/' component={AddUser} />

@@ -44,6 +44,6 @@ export const deleteMessages = {
 };
 
 export const updateMessages = {
-    path: '/api/v001/events/new-messages/',
+    path: '/api/v001/events/new-messages/:chatId',
     method: 'GET'
 };

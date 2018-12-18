@@ -36,23 +36,25 @@ class Messages extends Component {
 
         this.pingInterval = setInterval(() => {
             const prevMessages = this.state.messages;
-            createRequest(updateMessages).then(({ status, data }) => {
-                if (status === 'OK') {
-                    const alreadyDraw = data.filter(message => {
-                        const findMessage = prevMessages.find(item => {
-                            if (item.id === message.id) {
-                                return true;
-                            }
+            createRequest(updateMessages, { chatId }).then(
+                ({ status, data }) => {
+                    if (status === 'OK') {
+                        const alreadyDraw = data.filter(message => {
+                            const findMessage = prevMessages.find(item => {
+                                if (item.id === message.id) {
+                                    return true;
+                                }
+                            });
+                            if (findMessage) return true;
                         });
-                        if (findMessage) return true;
-                    });
-                    if (alreadyDraw.length === 0) {
-                        this.setState(({ messages }) => ({
-                            messages: messages.concat(data)
-                        }));
+                        if (alreadyDraw.length === 0) {
+                            this.setState(({ messages }) => ({
+                                messages: messages.concat(data)
+                            }));
+                        }
                     }
                 }
-            });
+            );
         }, 5000);
     }
 
