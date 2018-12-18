@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classNames from '../core/class-names/class-names';
 
 class Message extends PureComponent {
     // shouldComponentUpdate(nextProps) {
@@ -24,11 +25,10 @@ class Message extends PureComponent {
 
         return (
             <div
-                className={`message-wrapper ${
-                    message.isHighlight && message.isHighlight[myId]
-                        ? 'message-wrapper_highlight'
-                        : ''
-                } ${message.userId === myId ? 'message-wrapper_my' : ''}`}
+                className={classNames('message-wrapper', {
+                    highlight: message.isHighlight[myId],
+                    my: message.userId === myId
+                })}
                 onClick={this.highlightMessage}
                 data-id={message.id}
             >
