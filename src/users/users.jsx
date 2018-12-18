@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import UserName from '../user-name/user-name';
 import createRequest from '../core/create-request';
 import { fetchUsers } from '../core/api-config';
@@ -12,11 +11,6 @@ class Users extends Component {
         users: []
     };
 
-    openChatByUserId = event => {
-        const { openChatByUserId } = this.props;
-        openChatByUserId(event);
-    };
-
     componentDidMount() {
         createRequest(fetchUsers).then(({ status, data }) => {
             if (status === 'OK') {
@@ -27,6 +21,11 @@ class Users extends Component {
             }
         });
     }
+
+    openChatByUserId = event => {
+        const { openChatByUserId } = this.props;
+        openChatByUserId(event);
+    };
 
     render() {
         const { users } = this.state;

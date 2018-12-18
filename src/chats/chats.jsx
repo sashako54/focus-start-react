@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import ChatName from '../chat-name/chat-name';
 import createRequest from '../core/create-request';
 import { fetchChats } from '../core/api-config';
@@ -23,6 +22,11 @@ class Chats extends Component {
         });
     }
 
+    openChat = event => {
+        const { openChat } = this.props;
+        openChat(event);
+    };
+
     render() {
         const { chats } = this.state;
         const { chatId } = this.props;
@@ -30,7 +34,12 @@ class Chats extends Component {
             <div className='sidebar'>
                 <h3 className='sidebar-title'>Chats</h3>
                 {chats.map(chat => (
-                    <ChatName key={chat.chatId} chatId={chatId} chat={chat} />
+                    <ChatName
+                        openChat={this.openChat}
+                        key={chat.chatId}
+                        chatId={chatId}
+                        chat={chat}
+                    />
                 ))}
             </div>
         );

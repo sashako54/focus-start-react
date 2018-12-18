@@ -15,6 +15,12 @@ class MainPage extends Component {
         chatId: ''
     };
 
+    openChat = event => {
+        const { chatid } = event.currentTarget.dataset;
+        this.setState(() => ({ chatId: chatid }));
+        this.props.history.push(`/users/chat/${chatid}`);
+    };
+
     openChatByUserId = event => {
         const { userid } = event.currentTarget.dataset;
         console.log('userId', userid);
@@ -56,7 +62,9 @@ class MainPage extends Component {
                     />
                     <Route
                         path='/users'
-                        render={() => <Chats chatId={chatId} />}
+                        render={() => (
+                            <Chats openChat={this.openChat} chatId={chatId} />
+                        )}
                     />
                 </div>
                 <Route path='/users/chat/:chatId' component={Messages} />
