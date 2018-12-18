@@ -32,13 +32,15 @@ class Users extends Component {
         return (
             <div className='sidebar'>
                 <h3 className='sidebar-title'>Users</h3>
-                {users.map(user => (
-                    <UserName
-                        key={user.id}
-                        openChatByUserId={this.openChatByUserId}
-                        user={user}
-                    />
-                ))}
+                <ul className='sidebar-list'>
+                    {users.map(user => (
+                        <UserName
+                            key={user.id}
+                            openChatByUserId={this.openChatByUserId}
+                            user={user}
+                        />
+                    ))}
+                </ul>
             </div>
         );
     }

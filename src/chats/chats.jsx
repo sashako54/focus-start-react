@@ -33,14 +33,16 @@ class Chats extends Component {
         return (
             <div className='sidebar'>
                 <h3 className='sidebar-title'>Chats</h3>
-                {chats.map(chat => (
-                    <ChatName
-                        openChat={this.openChat}
-                        key={chat.chatId}
-                        chatId={chatId}
-                        chat={chat}
-                    />
-                ))}
+                <ul className='sidebar-list'>
+                    {chats.map(chat => (
+                        <ChatName
+                            openChat={this.openChat}
+                            key={chat.chatId}
+                            chatId={chatId}
+                            chat={chat}
+                        />
+                    ))}
+                </ul>
             </div>
         );
     }

@@ -9,13 +9,13 @@ class UserName extends Component {
     render() {
         const { user } = this.props;
         return (
-            <div
+            <li
                 className='sidebar-item'
                 data-userid={user.id}
                 onClick={this.openChatByUserId}
             >
                 {user.name}
-            </div>
+            </li>
         );
     }
 }

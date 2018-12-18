@@ -10,7 +10,7 @@ class ChatName extends Component {
     render() {
         const { chat, chatId } = this.props;
         return (
-            <div
+            <li
                 className={classNames('sidebar-item', {
                     active: chatId === chat.chatId
                 })}
@@ -18,7 +18,7 @@ class ChatName extends Component {
                 onClick={this.openChat}
             >
                 {chat.users.join(', ')}
-            </div>
+            </li>
         );
     }
 }
