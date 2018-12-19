@@ -8,7 +8,10 @@ class ChatName extends Component {
     };
 
     render() {
-        const { chat, chatId } = this.props;
+        const { chat, chatId, numNewMessages } = this.props;
+        console.log('render chat-name', 'numNewMessages', numNewMessages);
+        console.log('chatId', chat.chatId);
+        console.log('numNewMessages[chatId]', numNewMessages[chat.chatId]);
         return (
             <li
                 className={classNames('sidebar-item', {
@@ -18,6 +21,13 @@ class ChatName extends Component {
                 onClick={this.openChat}
             >
                 {chat.users.join(', ')}
+                {numNewMessages[chat.chatId] ? (
+                    <div className='sidebar-item__num-new-messages'>
+                        {numNewMessages[chat.chatId]}
+                    </div>
+                ) : (
+                    ''
+                )}
             </li>
         );
     }

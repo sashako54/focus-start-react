@@ -39,13 +39,15 @@ class Chats extends Component {
 
     render() {
         const { chats } = this.state;
-        const { chatId } = this.props;
+        const { chatId, numNewMessages } = this.props;
+        console.log('render chats', 'numNewMessages', numNewMessages);
         return (
             <div className='sidebar'>
                 <h3 className='sidebar-title'>Chats</h3>
                 <ul className='sidebar-list'>
                     {chats.map(chat => (
                         <ChatName
+                            numNewMessages={numNewMessages}
                             openChat={this.openChat}
                             key={chat.chatId}
                             chatId={chatId}

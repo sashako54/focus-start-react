@@ -7,12 +7,17 @@ import Chats from '../chats/chats';
 import createRequest from '../core/create-request';
 import { fetchChatByUserId, createChatByUserId } from '../core/api-config';
 // import classNames from '../core/class-names/class-names';
-// import getCookie from '../core/getCookie';
 
 class MainPage extends Component {
     state = {
-        // id: getCookie('id'),
-        chatId: ''
+        chatId: '',
+        numNewMessages: {}
+    };
+
+    getNumNewMessages = numNewMessages => {
+        console.log('получили количество новых сообщений в main-page');
+        this.setState(() => ({ numNewMessages }));
+        console.log('numNewMessages', this.state.numNewMessages);
     };
 
     openChat = event => {
@@ -50,7 +55,8 @@ class MainPage extends Component {
     };
 
     render() {
-        const { chatId } = this.state;
+        const { chatId, numNewMessages } = this.state;
+        console.log('render main page');
         return (
             <div className='mainpage-wrapper cover'>
                 <div className='sidebar-wrapper'>
@@ -63,11 +69,24 @@ class MainPage extends Component {
                     <Route
                         path='/users'
                         render={() => (
-                            <Chats openChat={this.openChat} chatId={chatId} />
+                            <Chats
+                                numNewMessages={numNewMessages}
+                                openChat={this.openChat}
+                                chatId={chatId}
+                            />
                         )}
                     />
                 </div>
-                <Route path='/users/chat/:chatId' component={Messages} />
+                {/* <Route path='/users/chat/:chatId' component={Messages} /> */}
+                <Route
+                    path='/users/chat/:chatId'
+                    render={props => (
+                        <Messages
+                            {...props}
+                            getNumNewMessages={this.getNumNewMessages}
+                        />
+                    )}
+                />
             </div>
         );
     }

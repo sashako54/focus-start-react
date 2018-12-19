@@ -18,7 +18,8 @@ class Messages extends Component {
         id: getCookie('id'),
         isLoading: true,
         messages: [],
-        chatName: ''
+        chatName: '',
+        numNewMessages: {}
     };
 
     listRef = createRef();
@@ -37,31 +38,7 @@ class Messages extends Component {
         });
 
         this.pingInterval = setInterval(() => {
-            const prevMessages = this.state.messages;
-            createRequest(updateMessages, { chatId }).then(
-                ({ status, data }) => {
-                    if (status === 'OK') {
-                        console.log('data.numNewMessages', data.numNewMessages);
-                        const alreadyDraw = data.newMessagesUpdate.filter(
-                            message => {
-                                const findMessage = prevMessages.find(item => {
-                                    if (item.id === message.id) {
-                                        return true;
-                                    }
-                                });
-                                if (findMessage) return true;
-                            }
-                        );
-                        if (alreadyDraw.length === 0) {
-                            this.setState(({ messages }) => ({
-                                messages: messages.concat(
-                                    data.newMessagesUpdate
-                                )
-                            }));
-                        }
-                    }
-                }
-            );
+            this.updateMessages(chatId);
         }, 5000);
     }
 
@@ -87,31 +64,7 @@ class Messages extends Component {
         }
         clearInterval(this.pingInterval);
         this.pingInterval = setInterval(() => {
-            const prevMessages = this.state.messages;
-            createRequest(updateMessages, { chatId }).then(
-                ({ status, data }) => {
-                    if (status === 'OK') {
-                        console.log('data.numNewMessages', data.numNewMessages);
-                        const alreadyDraw = data.newMessagesUpdate.filter(
-                            message => {
-                                const findMessage = prevMessages.find(item => {
-                                    if (item.id === message.id) {
-                                        return true;
-                                    }
-                                });
-                                if (findMessage) return true;
-                            }
-                        );
-                        if (alreadyDraw.length === 0) {
-                            this.setState(({ messages }) => ({
-                                messages: messages.concat(
-                                    data.newMessagesUpdate
-                                )
-                            }));
-                        }
-                    }
-                }
-            );
+            this.updateMessages(chatId);
         }, 5000);
     }
 
@@ -189,6 +142,40 @@ class Messages extends Component {
                 return data;
             })
         }));
+    };
+
+    updateMessages = chatId => {
+        const { getNumNewMessages } = this.props;
+        const prevMessages = this.state.messages;
+        createRequest(updateMessages, { chatId })
+            .then(({ status, data }) => {
+                if (status === 'OK') {
+                    const alreadyDraw = data.newMessagesUpdate.filter(
+                        message => {
+                            const findMessage = prevMessages.find(item => {
+                                if (item.id === message.id) {
+                                    return true;
+                                }
+                            });
+                            if (findMessage) return true;
+                        }
+                    );
+                    if (alreadyDraw.length === 0) {
+                        this.setState(({ messages }) => ({
+                            messages: messages.concat(data.newMessagesUpdate),
+                            numNewMessages: data.numNewMessages
+                        }));
+                    } else {
+                        this.setState(() => ({
+                            numNewMessages: data.numNewMessages
+                        }));
+                    }
+                }
+            })
+            .then(() => {
+                console.log('прокидываем сообщение', this.state.numNewMessages);
+                getNumNewMessages(this.state.numNewMessages);
+            });
     };
 
     render() {
