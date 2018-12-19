@@ -17,7 +17,8 @@ class Messages extends Component {
     state = {
         id: getCookie('id'),
         isLoading: true,
-        messages: []
+        messages: [],
+        chatName: ''
     };
 
     listRef = createRef();
@@ -25,11 +26,12 @@ class Messages extends Component {
     componentDidMount() {
         console.log('this.props', this.props);
         const { chatId } = this.props.match.params;
-        createRequest(fetchMessages, { chatId }).then(response => {
-            if (response.status === 'OK') {
+        createRequest(fetchMessages, { chatId }).then(({ status, data }) => {
+            if (status === 'OK') {
                 this.setState({
                     isLoading: false,
-                    messages: response.data
+                    messages: data.messages,
+                    chatName: data.chatName.join(', ')
                 });
             }
         });
@@ -66,14 +68,17 @@ class Messages extends Component {
         }
 
         if (prevProps.match.params.chatId !== chatId) {
-            createRequest(fetchMessages, { chatId }).then(response => {
-                if (response.status === 'OK') {
-                    this.setState({
-                        isLoading: false,
-                        messages: response.data
-                    });
+            createRequest(fetchMessages, { chatId }).then(
+                ({ status, data }) => {
+                    if (status === 'OK') {
+                        this.setState({
+                            isLoading: false,
+                            messages: data.messages,
+                            chatName: data.chatName.join(', ')
+                        });
+                    }
                 }
-            });
+            );
         }
         clearInterval(this.pingInterval);
         this.pingInterval = setInterval(() => {
@@ -177,11 +182,12 @@ class Messages extends Component {
     };
 
     render() {
-        const { messages, isLoading } = this.state;
+        const { messages, isLoading, chatName } = this.state;
 
         return (
             <div className='messages-wrapper'>
                 <div className='messages-info-wrapper'>
+                    <p className='messages-title'>{chatName}</p>
                     <DeleteMessages deleteMessages={this.deleteMessages} />
                 </div>
                 <div

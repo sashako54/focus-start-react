@@ -2,9 +2,9 @@
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    padding: 20px 0;
-    background-color: #cecece;
-    border-radius: 3px;
+    height: calc(100% - 68px);
+    background-image: url('../core/images/what-the-hex-dark.png');
+    background-size: 75%;
     overflow-y: auto;
 }
 
@@ -13,5 +13,18 @@
 }
 
 .messages-info-wrapper {
-    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+    background-color: #252525;
+    border-left: solid 1px #333;
+}
+
+.messages-title {
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #dfdfdf;
 }

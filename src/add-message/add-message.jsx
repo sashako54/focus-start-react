@@ -27,6 +27,7 @@ class AddMessage extends Component {
                         type='text'
                         name='text'
                         ref={this.textRef}
+                        autoComplete='off'
                     />
                     <input
                         className='add-message__button'
