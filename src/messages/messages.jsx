@@ -41,17 +41,22 @@ class Messages extends Component {
             createRequest(updateMessages, { chatId }).then(
                 ({ status, data }) => {
                     if (status === 'OK') {
-                        const alreadyDraw = data.filter(message => {
-                            const findMessage = prevMessages.find(item => {
-                                if (item.id === message.id) {
-                                    return true;
-                                }
-                            });
-                            if (findMessage) return true;
-                        });
+                        console.log('data.numNewMessages', data.numNewMessages);
+                        const alreadyDraw = data.newMessagesUpdate.filter(
+                            message => {
+                                const findMessage = prevMessages.find(item => {
+                                    if (item.id === message.id) {
+                                        return true;
+                                    }
+                                });
+                                if (findMessage) return true;
+                            }
+                        );
                         if (alreadyDraw.length === 0) {
                             this.setState(({ messages }) => ({
-                                messages: messages.concat(data)
+                                messages: messages.concat(
+                                    data.newMessagesUpdate
+                                )
                             }));
                         }
                     }
@@ -86,17 +91,22 @@ class Messages extends Component {
             createRequest(updateMessages, { chatId }).then(
                 ({ status, data }) => {
                     if (status === 'OK') {
-                        const alreadyDraw = data.filter(message => {
-                            const findMessage = prevMessages.find(item => {
-                                if (item.id === message.id) {
-                                    return true;
-                                }
-                            });
-                            if (findMessage) return true;
-                        });
+                        console.log('data.numNewMessages', data.numNewMessages);
+                        const alreadyDraw = data.newMessagesUpdate.filter(
+                            message => {
+                                const findMessage = prevMessages.find(item => {
+                                    if (item.id === message.id) {
+                                        return true;
+                                    }
+                                });
+                                if (findMessage) return true;
+                            }
+                        );
                         if (alreadyDraw.length === 0) {
                             this.setState(({ messages }) => ({
-                                messages: messages.concat(data)
+                                messages: messages.concat(
+                                    data.newMessagesUpdate
+                                )
                             }));
                         }
                     }
