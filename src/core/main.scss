@@ -19,8 +19,8 @@
 .header {
     position: relative;
     background-color: #fff;
-    box-shadow: 0 0 16px 1px #cecece;
     z-index: 1;
+    background-color: #252525;
 }
 
 .nav-wrapper {
@@ -33,7 +33,7 @@
 
 .nav-wrapper__link {
     text-transform: uppercase;
-    color: #000;
+    color: #dfdfdf;
     transition: color 200ms ease-in-out;
 }
 
@@ -49,10 +49,10 @@
 }
 
 .messages-wrapper {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-left: 20px;
     width: calc(100% - 200px);
-    height: 100%;
+    height: calc(100% - 10px);
 }
