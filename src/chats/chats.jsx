@@ -22,6 +22,16 @@ class Chats extends Component {
         });
     }
 
+    // componentDidUpdate(prevProps, prevState) {
+    //     const { chatId } = this.props;
+
+    //     if (prevProps.chatId !== chatId) {
+    //         this.setState({
+    //             chats: chats.concat(chatId)
+    //         });
+    //     }
+    // }
+
     openChat = event => {
         const { openChat } = this.props;
         openChat(event);
