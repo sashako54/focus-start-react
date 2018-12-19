@@ -182,6 +182,7 @@ class Messages extends Component {
         return (
             <div className='messages-wrapper'>
                 <div className='messages-info-wrapper'>
+                    <p className='messages-title'>название чата</p>
                     <DeleteMessages deleteMessages={this.deleteMessages} />
                 </div>
                 <div
