@@ -83,6 +83,7 @@ class AddUser extends Component {
                             type='text'
                             name='text'
                             ref={this.userNameRef}
+                            autoComplete='off'
                         />
                         <input
                             className='add-user__button'
