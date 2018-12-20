@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import UserName from '../user-name/user-name';
 import createRequest from '../core/create-request';
 import { fetchUsers } from '../core/api-config';
-import getCookie from '../core/getCookie';
 
 class Users extends Component {
     state = {
-        id: getCookie('id'),
-        isLoading: true,
         users: []
     };
 
@@ -15,7 +12,6 @@ class Users extends Component {
         createRequest(fetchUsers).then(({ status, data }) => {
             if (status === 'OK') {
                 this.setState({
-                    isLoading: false,
                     users: data
                 });
             }

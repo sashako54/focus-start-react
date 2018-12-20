@@ -1,4 +1,5 @@
 .messages {
+    position: relative;
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
@@ -19,8 +20,40 @@
     background-color: #252525;
 }
 
-.messages_loading {
-    background-color: red;
+.messages__preloader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 2;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    50% {
+        transform: rotateZ(140deg);
+    }
+
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+.messages__preloader {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 5px #dfdfdf;
+    border-top: solid 5px #252525;
+    animation: rotate 0.8s linear 1s infinite;
 }
 
 .messages-info-wrapper {

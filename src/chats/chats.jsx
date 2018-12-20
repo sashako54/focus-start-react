@@ -8,7 +8,6 @@ class Chats extends Component {
     state = {
         id: getCookie('id'),
         myName: getCookie('name'),
-        isLoading: true,
         chats: []
     };
 
@@ -16,7 +15,6 @@ class Chats extends Component {
         createRequest(fetchChats).then(({ status, data }) => {
             if (status === 'OK') {
                 this.setState({
-                    isLoading: false,
                     chats: data
                 });
             }

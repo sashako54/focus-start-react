@@ -7,7 +7,6 @@ import createRequest from '../core/create-request';
 class AddUser extends Component {
     state = {
         id: getCookie('id'),
-        isLoading: true,
         users: []
     };
 
@@ -22,7 +21,6 @@ class AddUser extends Component {
         createRequest(fetchAllUsers).then(({ status, data }) => {
             if (status === 'OK') {
                 this.setState({
-                    isLoading: false,
                     users: data
                 });
                 const { users } = this.state;
@@ -63,7 +61,6 @@ class AddUser extends Component {
         createRequest(createUsers, null, { name }).then(({ status, data }) => {
             if (status === 'OK') {
                 this.setState(({ users }) => ({
-                    isLoading: false,
                     users: users.concat(data),
                     id: data.id
                 }));

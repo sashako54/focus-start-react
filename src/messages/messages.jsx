@@ -63,7 +63,6 @@ class Messages extends Component {
             );
         }
         clearInterval(this.pingInterval);
-        // this.updateMessages(chatId);
         this.pingInterval = setInterval(() => {
             this.updateMessages(chatId);
         }, 5000);
@@ -188,10 +187,14 @@ class Messages extends Component {
                     <p className='messages-title'>{chatName}</p>
                     <DeleteMessages deleteMessages={this.deleteMessages} />
                 </div>
-                <div
-                    ref={this.listRef}
-                    className={classNames('messages', { loading: isLoading })}
-                >
+                <div className='messages' ref={this.listRef}>
+                    {isLoading ? (
+                        <div className='messages__preloader-wrapper'>
+                            <div className='messages__preloader' />
+                        </div>
+                    ) : (
+                        ''
+                    )}
                     {messages.map(message => (
                         <Message
                             message={message}
