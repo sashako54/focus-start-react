@@ -36,7 +36,7 @@ class Messages extends Component {
                 });
             }
         });
-
+        this.updateMessages(chatId);
         this.pingInterval = setInterval(() => {
             this.updateMessages(chatId);
         }, 5000);
@@ -63,6 +63,7 @@ class Messages extends Component {
             );
         }
         clearInterval(this.pingInterval);
+        // this.updateMessages(chatId);
         this.pingInterval = setInterval(() => {
             this.updateMessages(chatId);
         }, 5000);
