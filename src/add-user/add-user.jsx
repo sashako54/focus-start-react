@@ -24,7 +24,6 @@ class AddUser extends Component {
                     users: data
                 });
                 const { users } = this.state;
-                console.log('users', users);
                 const condition = users.some(user => {
                     if (user.id === id) {
                         return true;
@@ -39,9 +38,6 @@ class AddUser extends Component {
 
     componentDidUpdate() {
         const { users, id } = this.state;
-        console.log('users update', users);
-
-        console.log('id update', id);
         const condition = users.some(user => {
             if (user.id === id) {
                 return true;

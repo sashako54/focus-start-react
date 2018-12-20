@@ -9,9 +9,6 @@ class ChatName extends Component {
 
     render() {
         const { chat, chatId, numNewMessages } = this.props;
-        console.log('render chat-name', 'numNewMessages', numNewMessages);
-        console.log('chatId', chat.chatId);
-        console.log('numNewMessages[chatId]', numNewMessages[chat.chatId]);
         return (
             <li
                 className={classNames('sidebar-item', {

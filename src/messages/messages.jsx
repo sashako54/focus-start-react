@@ -25,7 +25,6 @@ class Messages extends Component {
     listRef = createRef();
 
     componentDidMount() {
-        console.log('this.props', this.props);
         const { chatId } = this.props.match.params;
         createRequest(fetchMessages, { chatId }).then(({ status, data }) => {
             if (status === 'OK') {
@@ -173,7 +172,6 @@ class Messages extends Component {
                 }
             })
             .then(() => {
-                console.log('прокидываем сообщение', this.state.numNewMessages);
                 getNumNewMessages(this.state.numNewMessages);
             });
     };

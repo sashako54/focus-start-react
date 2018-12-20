@@ -6,7 +6,6 @@ import getCookie from '../core/getCookie';
 
 class Chats extends Component {
     state = {
-        id: getCookie('id'),
         myName: getCookie('name'),
         chats: []
     };
@@ -43,7 +42,6 @@ class Chats extends Component {
     render() {
         const { chats } = this.state;
         const { chatId, numNewMessages } = this.props;
-        console.log('render chats', 'numNewMessages', numNewMessages);
         return (
             <div className='sidebar'>
                 <h3 className='sidebar-title'>Chats</h3>

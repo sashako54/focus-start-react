@@ -1,12 +1,11 @@
-import React, { Component, createRef } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import Messages from '../messages/messages';
 import Users from '../users/users';
 import Chats from '../chats/chats';
 // import PropTypes from 'prop-types';
 import createRequest from '../core/create-request';
 import { fetchChatByUserId, createChatByUserId } from '../core/api-config';
-// import classNames from '../core/class-names/class-names';
 
 class MainPage extends Component {
     state = {
@@ -59,7 +58,6 @@ class MainPage extends Component {
 
     render() {
         const { chatId, newChatId, newUserName, numNewMessages } = this.state;
-        console.log('render main page');
         return (
             <div className='mainpage-wrapper cover'>
                 <div className='sidebar-wrapper'>
