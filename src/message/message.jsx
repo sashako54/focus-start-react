@@ -4,12 +4,6 @@ import classNames from '../core/class-names/class-names';
 import getTime from '../core/getTime';
 
 class Message extends PureComponent {
-    // shouldComponentUpdate(nextProps) {
-    //     const { isMyMessage } = this.props.message;
-
-    //     return nextProps.message.isMyMessage !== isMyMessage;
-    // }
-
     static propTypes = {
         highlightMessage: PropTypes.func.isRequired
     };

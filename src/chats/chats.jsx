@@ -7,6 +7,7 @@ import getCookie from '../core/getCookie';
 class Chats extends Component {
     state = {
         id: getCookie('id'),
+        myName: getCookie('name'),
         isLoading: true,
         chats: []
     };
@@ -22,15 +23,19 @@ class Chats extends Component {
         });
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     const { chatId } = this.props;
+    componentDidUpdate(prevProps, prevState) {
+        const { newChatId, newUserName } = this.props;
+        const { myName } = this.state;
 
-    //     if (prevProps.chatId !== chatId) {
-    //         this.setState({
-    //             chats: chats.concat(chatId)
-    //         });
-    //     }
-    // }
+        if (prevProps.newChatId !== newChatId) {
+            const newChat = {};
+            newChat.chatId = newChatId;
+            newChat.users = [newUserName, myName];
+            this.setState(({ chats }) => ({
+                chats: chats.concat(newChat)
+            }));
+        }
+    }
 
     openChat = event => {
         const { openChat } = this.props;

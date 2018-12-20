@@ -12,6 +12,7 @@ class UserName extends Component {
             <li
                 className='sidebar-item'
                 data-userid={user.id}
+                data-username={user.name}
                 onClick={this.openChatByUserId}
             >
                 {user.name}

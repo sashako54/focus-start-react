@@ -11,13 +11,13 @@ import { fetchChatByUserId, createChatByUserId } from '../core/api-config';
 class MainPage extends Component {
     state = {
         chatId: '',
-        numNewMessages: {}
+        numNewMessages: {},
+        newChatId: '',
+        newUserName: ''
     };
 
     getNumNewMessages = numNewMessages => {
-        console.log('получили количество новых сообщений в main-page');
         this.setState(() => ({ numNewMessages }));
-        console.log('numNewMessages', this.state.numNewMessages);
     };
 
     openChat = event => {
@@ -27,26 +27,29 @@ class MainPage extends Component {
     };
 
     openChatByUserId = event => {
-        const { userid } = event.currentTarget.dataset;
-        console.log('userId', userid);
+        const { userid, username } = event.currentTarget.dataset;
         createRequest(fetchChatByUserId, { userId: userid })
             .then(({ status, data }) => {
-                console.log('data', data);
                 if (status === 'OK' && data) {
                     this.setState(() => ({
                         chatId: data.chatId
                     }));
                 } else {
-                    createRequest(createChatByUserId, { userId: userid }).then(
-                        ({ status, data }) => {
-                            console.log('createChatByUserId DATA', data);
+                    createRequest(createChatByUserId, { userId: userid })
+                        .then(({ status, data }) => {
                             if (status === 'OK') {
                                 this.setState(() => ({
-                                    chatId: data.chatId
+                                    chatId: data.chatId,
+                                    newChatId: data.chatId,
+                                    newUserName: username
                                 }));
                             }
-                        }
-                    );
+                        })
+                        .then(() => {
+                            this.props.history.push(
+                                `/users/chat/${this.state.chatId}`
+                            );
+                        });
                 }
             })
             .then(() => {
@@ -55,7 +58,7 @@ class MainPage extends Component {
     };
 
     render() {
-        const { chatId, numNewMessages } = this.state;
+        const { chatId, newChatId, newUserName, numNewMessages } = this.state;
         console.log('render main page');
         return (
             <div className='mainpage-wrapper cover'>
@@ -73,11 +76,12 @@ class MainPage extends Component {
                                 numNewMessages={numNewMessages}
                                 openChat={this.openChat}
                                 chatId={chatId}
+                                newChatId={newChatId}
+                                newUserName={newUserName}
                             />
                         )}
                     />
                 </div>
-                {/* <Route path='/users/chat/:chatId' component={Messages} /> */}
                 <Route
                     path='/users/chat/:chatId'
                     render={props => (
