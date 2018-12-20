@@ -8,6 +8,17 @@
     overflow-y: auto;
 }
 
+.sidebar-list::-webkit-scrollbar,
+.messages::-webkit-scrollbar {
+    width: 10px;
+    background-color: #373737;
+}
+
+.sidebar-list::-webkit-scrollbar-thumb,
+.messages::-webkit-scrollbar-thumb {
+    background-color: #252525;
+}
+
 .messages_loading {
     background-color: red;
 }
