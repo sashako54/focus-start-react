@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import UserName from '../user-name/user-name';
 import createRequest from '../core/create-request';
 import { fetchUsers } from '../core/api-config';
@@ -41,5 +42,9 @@ class Users extends Component {
         );
     }
 }
+
+Users.propTypes = {
+    openChatByUserId: PropTypes.func.isRequired
+};
 
 export default Users;

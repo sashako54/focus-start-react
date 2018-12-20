@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ChatName from '../chat-name/chat-name';
 import createRequest from '../core/create-request';
 import { fetchChats } from '../core/api-config';
@@ -60,5 +61,15 @@ class Chats extends Component {
         );
     }
 }
+
+Chats.propTypes = {
+    chatId: PropTypes.string.isRequired,
+    numNewMessages: PropTypes.shape({
+        message: PropTypes.string
+    }).isRequired,
+    openChat: PropTypes.func.isRequired,
+    newChatId: PropTypes.string.isRequired,
+    newUserName: PropTypes.string.isRequired
+};
 
 export default Chats;

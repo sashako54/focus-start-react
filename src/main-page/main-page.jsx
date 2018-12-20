@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import Messages from '../messages/messages';
 import Users from '../users/users';
 import Chats from '../chats/chats';
-// import PropTypes from 'prop-types';
 import createRequest from '../core/create-request';
 import { fetchChatByUserId, createChatByUserId } from '../core/api-config';
 

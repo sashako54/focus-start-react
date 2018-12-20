@@ -4,10 +4,6 @@ import classNames from '../core/class-names/class-names';
 import getTime from '../core/getTime';
 
 class Message extends PureComponent {
-    static propTypes = {
-        highlightMessage: PropTypes.func.isRequired
-    };
-
     highlightMessage = event => {
         const { highlightMessage } = this.props;
         highlightMessage(event);
@@ -44,5 +40,18 @@ class Message extends PureComponent {
         );
     }
 }
+
+Message.propTypes = {
+    message: PropTypes.shape({
+        userId: PropTypes.string,
+        id: PropTypes.string,
+        name: PropTypes.string,
+        text: PropTypes.string,
+        date: PropTypes.number,
+        isHighlight: PropTypes.object
+    }).isRequired,
+    highlightMessage: PropTypes.func.isRequired,
+    myId: PropTypes.string.isRequired
+};
 
 export default Message;

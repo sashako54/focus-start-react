@@ -12,10 +12,6 @@ class AddUser extends Component {
 
     userNameRef = createRef();
 
-    static propTypes = {
-        addUser: PropTypes.func.isRequired
-    };
-
     componentDidMount() {
         const { id } = this.state;
         createRequest(fetchAllUsers).then(({ status, data }) => {
@@ -45,6 +41,7 @@ class AddUser extends Component {
         });
         if (condition) {
             this.props.history.push('/users');
+            console.log('props', this.props);
         }
     }
 
@@ -89,5 +86,11 @@ class AddUser extends Component {
         );
     }
 }
+
+AddUser.propTypes = {
+    history: PropTypes.shape({
+        push: PropTypes.func
+    }).isRequired
+};
 
 export default AddUser;

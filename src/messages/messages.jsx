@@ -8,7 +8,6 @@ import {
     updateMessages,
     deleteMessages
 } from '../core/api-config';
-import classNames from '../core/class-names/class-names';
 import AddMessage from '../add-message/add-message';
 import DeleteMessages from '../delete-messages/delete-messages';
 import getCookie from '../core/getCookie';
@@ -112,7 +111,7 @@ class Messages extends Component {
                     isLoading: false,
                     messages: messages.reduce((prev, message, index) => {
                         const messagesObj = prev;
-                        for (let prop of highlightMessagesList) {
+                        for (const prop of highlightMessagesList) {
                             if (message.id === prop) {
                                 return prev;
                             }
@@ -209,12 +208,12 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
-    message: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        isHighlight: PropTypes.object
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            chatId: PropTypes.string
+        }).isRequired
     }).isRequired,
-    highlightMessage: PropTypes.func
+    getNumNewMessages: PropTypes.func.isRequired
 };
 
 export default Messages;
