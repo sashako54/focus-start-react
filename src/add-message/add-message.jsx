@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 class AddMessage extends Component {
     textRef = createRef();
 
-    static propTypes = {
-        addMessage: PropTypes.func.isRequired
-    };
-
     onSubmit = event => {
         const { addMessage } = this.props;
         event.preventDefault();
@@ -39,5 +35,9 @@ class AddMessage extends Component {
         );
     }
 }
+
+AddMessage.propTypes = {
+    addMessage: PropTypes.func.isRequired
+};
 
 export default AddMessage;
