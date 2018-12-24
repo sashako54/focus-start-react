@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class UserName extends Component {
     openChatByUserId = event => {
@@ -20,5 +21,13 @@ class UserName extends Component {
         );
     }
 }
+
+UserName.propTypes = {
+    openChatByUserId: PropTypes.func.isRequired,
+    user: PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string
+    }).isRequired
+};
 
 export default UserName;

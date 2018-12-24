@@ -96,7 +96,7 @@ class Messages extends Component {
         const prevMessages = this.state.messages;
         const myId = this.state.id;
         const highlightMessagesList = [];
-        prevMessages.map(message => {
+        prevMessages.forEach(message => {
             if (message.isHighlight[myId] === true) {
                 highlightMessagesList.push(message.id);
             }

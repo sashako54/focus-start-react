@@ -2,10 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 class DeleteMessages extends PureComponent {
-    static propTypes = {
-        deleteMessages: PropTypes.func.isRequired
-    };
-
     onClick = () => {
         const { deleteMessages } = this.props;
         deleteMessages();
@@ -22,5 +18,9 @@ class DeleteMessages extends PureComponent {
         );
     }
 }
+
+DeleteMessages.propTypes = {
+    deleteMessages: PropTypes.func.isRequired
+};
 
 export default DeleteMessages;

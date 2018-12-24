@@ -41,7 +41,6 @@ class AddUser extends Component {
         });
         if (condition) {
             this.props.history.push('/users');
-            console.log('props', this.props);
         }
     }
 
