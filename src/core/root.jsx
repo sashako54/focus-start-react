@@ -17,7 +17,7 @@ class Root extends Component {
                     <div className='header'>
                         <div className='nav-wrapper cover'>
                             <Link className='nav-wrapper__link' to='/'>
-                                Главная
+                                {'Главная'}
                             </Link>
                             {userName ? (
                                 <div className='nav-wrapper__name'>{`Ваш ник: ${userName}`}</div>

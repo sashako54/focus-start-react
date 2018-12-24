@@ -3,6 +3,7 @@ export const fetchAllUsers = {
     method: 'GET'
 };
 
+// Запрос на всех юзеров, кроме самого себя
 export const fetchUsers = {
     path: '/api/v001/users',
     method: 'GET'
