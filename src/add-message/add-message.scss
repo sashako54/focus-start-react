@@ -1,0 +1,35 @@
+.add-message {
+    display: flex;
+    // padding: 20px 0;
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: #252525;
+    border-left: solid 1px #333;
+}
+
+.add-message__field {
+    height: 32px;
+    width: calc(100% - 42px);
+    padding: 7px 15px;
+    font-size: 14px;
+    border: none;
+    color: #dfdfdf;
+    font-family: 'Arsenal', sans-serif;
+    resize: none;
+    background-color: #252525;
+}
+
+.add-message__button {
+    width: 32px;
+    height: 32px;
+    border-radius: 3px;
+    border: none;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0iIzI1MjUyNSIvPjxwYXRoIGZpbGw9IiNkZmRmZGYiIGQ9Ik0yLjAxIDIxTDIzIDEyIDIuMDEgMyAyIDEwbDE1IDItMTUgMnoiLz48L3N2Zz4=);
+    transform: rotateZ(180deg);
+    transition: background-image 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.add-message__button:hover {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0iIzI1MjUyNSIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yLjAxIDIxTDIzIDEyIDIuMDEgMyAyIDEwbDE1IDItMTUgMnoiLz48L3N2Zz4=);
+}

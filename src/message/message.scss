@@ -1,14 +1,40 @@
 .message-wrapper {
     display: flex;
-    padding: 5px 0;
+    padding: 5px 20px;
+    transition: background-color 200ms ease-in-out;
+    cursor: pointer;
 }
 
 .message {
+    position: relative;
     display: flex;
+    flex-direction: column;
     padding: 10px;
     max-width: 70%;
-    border-radius: 10px;
-    background-color: #f1f1f1;
+    border-top-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #252525;
+    word-break: break-word;
+    color: #dfdfdf;
+}
+
+.message::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 0;
+    border-color: transparent #252525 transparent transparent;
+}
+
+.message-wrapper_highlight {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .message-wrapper_my {
@@ -16,5 +42,28 @@
 }
 
 .message_my {
-    text-align: end;
+    align-items: flex-end;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0;
+    background-color: #373737;
+}
+
+.message_my::after {
+    left: auto;
+    right: -10px;
+    border-width: 10px 10px 0 0;
+    border-color: #373737 transparent transparent transparent;
+}
+
+.message-title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.message-text {
+    padding-bottom: 5px;
+}
+
+.message-date {
+    font-size: 12px;
 }

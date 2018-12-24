@@ -1,13 +1,74 @@
 .messages {
+    position: relative;
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    padding: 20px;
-    background-color: #cecece;
-    border-radius: 3px;
+    height: calc(100% - 68px);
+    background-image: url('../core/images/what-the-hex-dark.png');
+    background-size: 75%;
     overflow-y: auto;
 }
 
-.messages_loading {
-    background-color: red;
+.sidebar-list::-webkit-scrollbar,
+.messages::-webkit-scrollbar {
+    width: 10px;
+    background-color: #373737;
+}
+
+.sidebar-list::-webkit-scrollbar-thumb,
+.messages::-webkit-scrollbar-thumb {
+    background-color: #252525;
+}
+
+.messages__preloader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 2;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    50% {
+        transform: rotateZ(140deg);
+    }
+
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+.messages__preloader {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 5px #dfdfdf;
+    border-top: solid 5px #252525;
+    animation: rotate 0.8s linear 1s infinite;
+}
+
+.messages-info-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+    background-color: #252525;
+    border-left: solid 1px #333;
+}
+
+.messages-title {
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #dfdfdf;
 }

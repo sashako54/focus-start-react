@@ -1,4 +1,8 @@
 module.exports = {
+    printWidth: 80,
     tabWidth: 4,
-    singleQuote: true
+    singleQuote: true,
+    jsxSingleQuote: true,
+    jsxBracketSameLine: false, // default
+    endOfLine: 'lf'
 };

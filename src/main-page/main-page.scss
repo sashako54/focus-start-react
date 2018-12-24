@@ -1,0 +1,54 @@
+.sidebar-wrapper {
+    margin-top: 10px;
+    width: 200px;
+    height: calc(100% - 10px);
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 50%;
+    background-color: #252525;
+}
+
+.sidebar-title {
+    padding: 9px 20px;
+    font-size: 14px;
+    font-weight: 300;
+    border-bottom: solid 1px #333;
+    color: #dfdfdf;
+    text-transform: uppercase;
+}
+
+.sidebar-list {
+    overflow-y: auto;
+}
+
+.sidebar-item {
+    position: relative;
+    padding: 5px 20px;
+    font-size: 14px;
+    color: #dfdfdf;
+    cursor: pointer;
+    word-break: break-word;
+    border-bottom: solid 1px #333;
+}
+
+.sidebar-item__num-new-messages {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 2px;
+    right: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #cecece;
+    color: #333;
+}
+
+.sidebar-item_active {
+    background-color: rgba(0, 0, 0, 0.1);
+}

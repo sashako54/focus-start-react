@@ -1,19 +1,50 @@
+export const fetchAllUsers = {
+    path: '/api/v001/users/all',
+    method: 'GET'
+};
+
+// Запрос на всех юзеров, кроме самого себя
+export const fetchUsers = {
+    path: '/api/v001/users',
+    method: 'GET'
+};
+
+export const createUsers = {
+    path: '/api/v001/users',
+    method: 'POST'
+};
+
+export const fetchChats = {
+    path: '/api/v001/chats',
+    method: 'GET'
+};
+
+export const fetchChatByUserId = {
+    path: '/api/v001/chats/:userId',
+    method: 'GET'
+};
+
+export const createChatByUserId = {
+    path: '/api/v001/chats/:userId',
+    method: 'POST'
+};
+
 export const fetchMessages = {
-    path: '/api/v001/messages',
+    path: '/api/v001/chats/:chatId/messages',
     method: 'GET'
 };
 
-export const createMessages = {
-    path: '/api/v001/messages',
+export const createMessage = {
+    path: '/api/v001/chats/:chatId/messages',
     method: 'POST'
 };
 
-export const fetchMessagesFromChats = {
-    path: '/api/v001/chats/f1f87db0abd2f/messages',
+export const deleteMessages = {
+    path: '/api/v001/chats/:chatId/messages',
+    method: 'PATCH'
+};
+
+export const updateMessages = {
+    path: '/api/v001/events/new-messages/:chatId',
     method: 'GET'
-};
-
-export const createMessagesFromChats = {
-    path: '/api/v001/chats/f1f87db0abd2f/messages',
-    method: 'POST'
 };
